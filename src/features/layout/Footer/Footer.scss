@@ -1,0 +1,6 @@
+@use "../../../styles/variables" as *;
+.footer {
+  color: $footer-color;
+  font-size: $footer-font-size;
+  text-align: center;
+}
