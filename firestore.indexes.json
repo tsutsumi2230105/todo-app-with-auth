@@ -10,7 +10,7 @@
   //       { "fieldPath": "bar", "mode": "DESCENDING" }
   //     ]
   //   },
-  //,
+  //
   //  "fieldOverrides": [
   //    {
   //      "collectionGroup": "widgets",
