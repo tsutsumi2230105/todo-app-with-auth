@@ -3,7 +3,7 @@
 }
 
 @mixin input-base {
-  width: 398px;
+  width: 100%;
   height: 36px;
   padding: 4px 12px;
   border-radius: 8px;
@@ -17,7 +17,7 @@
   line-height: 100%;
 }
 
-.signup__page {
+.signup {
   min-height: 100vh;
   min-width: 100vw;
   background-color: #333;
@@ -25,112 +25,142 @@
   align-items: center;
   justify-content: center;
 
-  .signup__component {
+  &__component {
     background-color: #fff;
     width: 448px;
-    height: 434px;
+    height: 360px;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 21px;
+    gap: 26px;
+  }
+  &__heading {
+    width: 100%;
+    height: 90px;
+    padding: 24px 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .signup__heading {
-      width: 446px;
-      height: 90px;
-      padding: 24px 24px 0;
+  &__title {
+    color: #0a0a0a;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.07px;
+    width: 100%;
+    text-align: center;
+    @extend %font-inter;
+  }
 
-      .signup__title,
-      .signup__subtitle {
-        @extend %font-inter;
-        text-align: center;
-      }
+  &__subtitle {
+    color: #717182;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    width: 100%;
+    text-align: center;
+    @extend %font-inter;
+  }
 
-      .signup__title {
-        color: #0a0a0a;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 32px;
-        letter-spacing: 0.07px;
-      }
+  &__form {
+    height: 244px;
+  }
 
-      .signup__subtitle {
-        color: #717182;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: -0.31px;
-      }
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  &__fields {
+    width: 100%;
+    height: 132px;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__field {
+    height: 58px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    color: #0a0a0a;
+    @extend %font-inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.15px;
+  }
+
+  &__input {
+    @include input-base;
+    color: black;
+  }
+
+  &__action {
+    width: 100%;
+    height: 96px;
+    padding: 0 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__button {
+    background-color: #030213;
+    width: 100%;
+    height: 36px;
+    padding: 8px 16px;
+    margin: 0 auto;
+    display: block;
+
+    color: #fff;
+    @extend %font-inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    text-align: center;
+  }
+
+  p {
+    @extend %font-inter;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    text-align: center;
+    color: #717182;
+  }
+
+  &__link {
+    @extend %font-inter;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #030213;
+  }
+}
+
+@media (max-width: 520px) {
+  .signup {
+    &__component {
+      width: 359px;
+      height: 360px;
+      gap: 26px;
     }
 
-    .signup__form {
-      width: 446px;
-      height: 206px;
-      padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      .signup__field {
-        height: 58px;
-
-        .signup__label {
-          color: #0a0a0a;
-          @extend %font-inter;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 14px;
-          letter-spacing: 0.15px;
-        }
-
-        .signup__input {
-          @include input-base;
-        }
-      }
-    }
-
-    .signup__action {
-      width: 446px;
-      height: 96px;
-      padding: 0 0 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-
-      .signup__button {
-        background-color: #030213;
-        width: 398px;
-        height: 36px;
-        padding: 8px 16px;
-        margin: 0 auto;
-        display: block;
-
-        color: #fff;
-        @extend %font-inter;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: -0.15px;
-        text-align: center;
-      }
-
-      p,
-      .signup__link {
-        @extend %font-inter;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: -0.15px;
-        text-align: center;
-      }
-
-      p {
-        color: #717182;
-      }
-
-      .signup__link {
-        color: #030213;
-      }
+    &__heading {
+      padding: 24px 24px 10px 24px;
     }
   }
 }
