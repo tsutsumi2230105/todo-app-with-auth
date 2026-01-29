@@ -1,3 +1,5 @@
+import AuthHeader from "../../components/auth/AuthHeader"
+import AuthButton from "../../components/auth/AuthButton"
 import { Link } from "react-router-dom"
 import "./SignUp.scss"
 
@@ -6,10 +8,10 @@ const SignUp = () => {
     <div className="signup">
       <div className="signup__component">
         <div className="signup__heading">
-          <h1 className="signup__title">サインアップ</h1>
-          <h2 className="signup__subtitle">
-            新しいアカウントを作成してください
-          </h2>
+          <AuthHeader
+            title="サインアップ"
+            subtitle="新しいアカウントを作成してください"
+          />
         </div>
 
         <form className="signup__form">
@@ -56,9 +58,7 @@ const SignUp = () => {
             </div>
 
             <div className="signup__action">
-              <button className="signup__button" type="submit">
-                サインアップ
-              </button>
+              <AuthButton>サインアップ</AuthButton>
               <p>
                 すでにアカウントをお持ちの方は
                 <Link to="/login" className="signup__link">
