@@ -13,7 +13,7 @@ const SignUp = () => {
         </div>
 
         <form className="signup__form">
-          <div className="login__main">
+          <div className="signup__main">
             <div className="signup__fields">
               <div className="signup__field">
                 <label className="signup__label" htmlFor="email">
@@ -53,18 +53,18 @@ const SignUp = () => {
                   type="password"
                 ></input>
               </div>
+            </div>
 
-              <div className="signup__action">
-                <button className="signup__button" type="submit">
-                  サインアップ
-                </button>
-                <p>
-                  すでにアカウントをお持ちの方は
-                  <Link to="/login" className="signup__link">
-                    ログイン
-                  </Link>
-                </p>
-              </div>
+            <div className="signup__action">
+              <button className="signup__button" type="submit">
+                サインアップ
+              </button>
+              <p>
+                すでにアカウントをお持ちの方は
+                <Link to="/login" className="signup__link">
+                  ログイン
+                </Link>
+              </p>
             </div>
           </div>
         </form>
