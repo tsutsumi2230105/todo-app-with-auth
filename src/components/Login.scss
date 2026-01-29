@@ -85,6 +85,7 @@
 
         .login__input {
           @include input-base;
+          color: black;
         }
       }
     }
