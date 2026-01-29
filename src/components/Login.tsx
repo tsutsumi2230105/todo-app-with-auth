@@ -43,7 +43,7 @@ const Login = () => {
           </button>
           <p>
             アカウントをお持ちでない方は
-            <a className="login__link" href="/SignUp">
+            <a className="login__link" href="/signup">
               サインアップ
             </a>
           </p>
