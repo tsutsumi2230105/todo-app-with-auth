@@ -20,7 +20,7 @@ const Login = () => {
               id="email"
               name="email"
               type="email"
-            ></input>
+            />
           </div>
 
           <div className="login__field">
@@ -33,7 +33,7 @@ const Login = () => {
               id="password"
               name="password"
               type="password"
-            ></input>
+            />
           </div>
         </form>
 
