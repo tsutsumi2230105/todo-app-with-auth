@@ -150,3 +150,17 @@
     color: #030213;
   }
 }
+
+@media (max-width: 393px) {
+  .login {
+    &__component {
+      width: 359px;
+      height: 360px;
+      gap: 26px;
+    }
+
+    &__heading {
+      padding: 24px 24px 10px 24px;
+    }
+  }
+}
