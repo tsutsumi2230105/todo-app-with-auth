@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./SignUp.scss"
 
 const SignUp = () => {
@@ -58,9 +59,9 @@ const SignUp = () => {
           </button>
           <p>
             すでにアカウントをお持ちの方は
-            <a className="signup__link" href="/SignUp">
+            <Link to="/login" className="signup__link">
               ログイン
-            </a>
+            </Link>
           </p>
         </div>
       </div>
