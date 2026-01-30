@@ -2,7 +2,7 @@ import "./AuthHeader.scss"
 
 type AuthHeaderProps = {
   title: string
-  subtitle?: string
+  subtitle: string
 }
 
 const AuthHeader = ({ title, subtitle }: AuthHeaderProps) => {
