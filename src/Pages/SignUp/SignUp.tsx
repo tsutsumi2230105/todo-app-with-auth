@@ -1,5 +1,6 @@
 import AuthHeader from "../../components/auth/AuthHeader"
 import AuthButton from "../../components/auth/AuthButton"
+import AuthField from "../../components/auth/AuthField"
 import { Link } from "react-router-dom"
 import "./SignUp.scss"
 
@@ -17,44 +18,27 @@ const SignUp = () => {
         <form className="signup__form">
           <div className="signup__main">
             <div className="signup__fields">
-              <div className="signup__field">
-                <label className="signup__label" htmlFor="email">
-                  メールアドレス
-                </label>
-                <input
-                  className="signup__input"
-                  placeholder="email@example.com"
-                  id="email"
-                  name="email"
-                  type="email"
-                />
-              </div>
-
-              <div className="signup__field">
-                <label className="signup__label" htmlFor="password">
-                  パスワード
-                </label>
-                <input
-                  className="signup__input"
-                  placeholder="password"
-                  id="password"
-                  name="password"
-                  type="password"
-                ></input>
-              </div>
-
-              <div className="signup__field">
-                <label className="signup__label" htmlFor="password__confirm">
-                  パスワード確認
-                </label>
-                <input
-                  className="signup__input"
-                  placeholder="password"
-                  id="password__confirm"
-                  name="password__confirm"
-                  type="password"
-                ></input>
-              </div>
+              <AuthField
+                label="メールアドレス"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email@example.com"
+              />
+              <AuthField
+                label="パスワード"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="password"
+              />
+              <AuthField
+                label="パスワード確認"
+                id="password_confirm"
+                name="password_confirm"
+                type="password"
+                placeholder="password"
+              />
             </div>
 
             <div className="signup__action">

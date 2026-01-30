@@ -1,6 +1,8 @@
 import AuthHeader from "../../components/auth/AuthHeader"
 import AuthButton from "../../components/auth/AuthButton"
+import AuthField from "../../components/auth/AuthField"
 import { Link } from "react-router-dom"
+
 import "./Login.scss"
 
 const Login = () => {
@@ -17,31 +19,21 @@ const Login = () => {
         <form className="login__form">
           <div className="login__main">
             <div className="login__fields">
-              <div className="login__field">
-                <label className="login__label" htmlFor="email">
-                  メールアドレス
-                </label>
-                <input
-                  className="login__input"
-                  placeholder="email@example.com"
-                  id="email"
-                  name="email"
-                  type="email"
-                />
-              </div>
+              <AuthField
+                label="メールアドレス"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email@example.com"
+              />
 
-              <div className="login__field">
-                <label className="login__label" htmlFor="password">
-                  パスワード
-                </label>
-                <input
-                  className="login__input"
-                  placeholder="password"
-                  id="password"
-                  name="password"
-                  type="password"
-                />
-              </div>
+              <AuthField
+                label="パスワード"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="password"
+              />
             </div>
 
             <div className="login__action">
