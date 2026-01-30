@@ -16,12 +16,12 @@ const AuthField = ({
   placeholder,
 }: AuthFieldProps) => {
   return (
-    <div className="AuthField">
-      <label className="AuthField__label" htmlFor={id}>
+    <div className="auth-field">
+      <label className="auth-field__label" htmlFor={id}>
         {label}
       </label>
       <input
-        className="AuthField__input"
+        className="auth-field__input"
         id={id}
         name={name}
         type={type}

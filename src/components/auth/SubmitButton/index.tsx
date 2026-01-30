@@ -6,7 +6,7 @@ type SubmitButtonProps = {
 
 const SubmitButton = ({ children }: SubmitButtonProps) => {
   return (
-    <button className="SubmitButton" type="submit">
+    <button className="submit-button" type="submit">
       {children}
     </button>
   )

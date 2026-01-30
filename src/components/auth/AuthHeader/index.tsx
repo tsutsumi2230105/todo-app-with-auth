@@ -7,9 +7,9 @@ type AuthHeaderProps = {
 
 const AuthHeader = ({ title, subtitle }: AuthHeaderProps) => {
   return (
-    <div className="AuthHeader">
-      <h1 className="AuthHeader__title">{title}</h1>
-      <h2 className="AuthHeader__subtitle">{subtitle}</h2>
+    <div className="auth-header">
+      <h1 className="auth-header__title">{title}</h1>
+      <h2 className="auth-header__subtitle">{subtitle}</h2>
     </div>
   )
 }
