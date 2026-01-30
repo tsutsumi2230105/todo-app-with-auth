@@ -1,5 +1,5 @@
 import AuthHeader from "../../components/auth/AuthHeader"
-import AuthButton from "../../components/auth/AuthButton"
+import SubmitButton from "../../components/auth/SubmitButton"
 import AuthField from "../../components/auth/AuthField"
 import { Link } from "react-router-dom"
 
@@ -37,7 +37,7 @@ const Login = () => {
             </div>
 
             <div className="login__action">
-              <AuthButton>ログイン</AuthButton>
+              <SubmitButton>ログイン</SubmitButton>
               <p>
                 アカウントをお持ちでない方は
                 <Link to="/signup" className="login__link">
