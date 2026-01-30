@@ -1,7 +1,3 @@
-%font-inter {
-  font-family: Inter;
-}
-
 @mixin input-base {
   width: 100%;
   height: 36px;
@@ -9,15 +5,13 @@
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #f3f3f5;
-
-  @extend %font-inter;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.15px;
   line-height: 100%;
 }
 
-.login {
+.signup {
   min-height: 100vh;
   min-width: 100vw;
   background-color: #333;
@@ -28,7 +22,7 @@
   &__component {
     background-color: #fff;
     width: 448px;
-    height: 360px;
+    height: 434px;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
@@ -44,30 +38,8 @@
     align-items: center;
   }
 
-  &__title {
-    color: #0a0a0a;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 32px;
-    letter-spacing: 0.07px;
-    width: 100%;
-    text-align: center;
-    @extend %font-inter;
-  }
-
-  &__subtitle {
-    color: #717182;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.31px;
-    width: 100%;
-    text-align: center;
-    @extend %font-inter;
-  }
-
   &__form {
-    height: 244px;
+    height: 318px;
   }
 
   &__main {
@@ -77,32 +49,11 @@
   }
   &__fields {
     width: 100%;
-    height: 132px;
+    height: 206px;
     padding: 0 24px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  &__field {
-    height: 58px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  &__label {
-    color: #0a0a0a;
-    @extend %font-inter;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 14px;
-    letter-spacing: 0.15px;
-  }
-
-  &__input {
-    @include input-base;
-    color: black;
   }
 
   &__action {
@@ -114,25 +65,7 @@
     gap: 16px;
   }
 
-  &__button {
-    background-color: #030213;
-    width: 100%;
-    height: 36px;
-    padding: 8px 16px;
-    margin: 0 auto;
-    display: block;
-
-    color: #fff;
-    @extend %font-inter;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.15px;
-    text-align: center;
-  }
-
   p {
-    @extend %font-inter;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -142,7 +75,6 @@
   }
 
   &__link {
-    @extend %font-inter;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -152,10 +84,10 @@
 }
 
 @media (max-width: 520px) {
-  .login {
+  .signup {
     &__component {
       width: 359px;
-      height: 360px;
+      height: 434px;
       gap: 26px;
     }
 
