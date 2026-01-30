@@ -4,7 +4,7 @@ type AuthFieldProps = {
   label: string
   id: string
   name: string
-  type: string
+  type: "email" | "password" | "text"
   placeholder?: string
 }
 
