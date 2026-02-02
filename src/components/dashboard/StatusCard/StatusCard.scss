@@ -1,0 +1,58 @@
+.statuscard {
+  width: 308px;
+  height: 106px;
+  border-radius: 14px;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  padding: 25px;
+  background-color: #ffffff;
+}
+
+.statuscard__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statuscard__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statuscard__label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #717182;
+}
+
+.statuscard__value {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.07px;
+  color: #0a0a0a;
+}
+
+.statuscard__icon-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+}
+
+.statuscard__icon-bg--all {
+  background-color: #dbeafe;
+}
+
+.statuscard__icon-bg--active {
+  background-color: #f3e8ff;
+}
+.statuscard__icon-bg--done {
+  background-color: #dcfce7;
+}
+.statuscard__icon-bg--expired {
+  background-color: #ffe2e2;
+}
