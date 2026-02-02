@@ -3,13 +3,11 @@
   height: 106px;
   border-radius: 14px;
   border: 1px solid rgb(0, 0, 0, 0.1);
-  padding: 24px;
+  padding: 25px;
   background-color: #ffffff;
 }
 
 .statuscard__content {
-  width: 258px;
-  height: 56px;
   display: flex;
   justify-content: space-between;
 }
@@ -17,8 +15,6 @@
 .statuscard__text {
   display: flex;
   flex-direction: column;
-  width: 70px;
-  height: 56px;
   gap: 4px;
 }
 

@@ -1,5 +1,5 @@
 import "./DashBoard.scss"
-import StatusCard from "../../components/dashboard/StatusCard/index.tsx"
+import StatusCard from "../../components/dashboard/StatusCard"
 import AllTaskLogo from "../../assets/images/all_task_logo.png"
 import ActiveTaskLogo from "../../assets/images/active_task_logo.png"
 import CompletedLogo from "../../assets/images/completed_task_logo.png"
