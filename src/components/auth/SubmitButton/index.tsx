@@ -8,7 +8,7 @@ type SubmitButtonProps = {
 const SubmitButton = ({ children, isLoading }: SubmitButtonProps) => {
   return (
     <button className="submit-button" type="submit" disabled={isLoading}>
-      {isLoading ? "ログイン中..." : children}{" "}
+      {isLoading ? "ログイン中..." : children}
     </button>
   )
 }
