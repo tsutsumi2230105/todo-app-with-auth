@@ -5,7 +5,6 @@ import { auth } from "../utils/firebase"
 
 type UseFirebase = () => {
   loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
   email: string
   setEmail: React.Dispatch<React.SetStateAction<string>>
   password: string
@@ -35,7 +34,6 @@ export const useFirebase: UseFirebase = () => {
 
   return {
     loading,
-    setLoading,
     email,
     setEmail,
     password,
