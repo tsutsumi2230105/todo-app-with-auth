@@ -25,11 +25,9 @@ export const useFirebase: UseFirebase = () => {
     try {
       const userLogin = await signInWithEmailAndPassword(auth, email, password)
       alert("ログインに成功しました。")
-      console.log("ログインに成功しました。", userLogin)
       navigate("/dashboard")
     } catch (error) {
       alert("ログインに失敗しました。")
-      console.error("ログインに失敗しました。", error)
     } finally {
       setLoading(false)
     }
