@@ -1,11 +1,11 @@
-import "./DashBoard.scss"
+import "./Dashboard.scss"
 import StatusCard from "../../components/dashboard/StatusCard"
 import AllTaskLogo from "../../assets/images/all_task_logo.png"
 import ActiveTaskLogo from "../../assets/images/active_task_logo.png"
 import CompletedLogo from "../../assets/images/completed_task_logo.png"
 import ExpiredLogo from "../../assets/images/expired_task_logo.png"
 
-const DashBoard = () => {
+const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="statuscards">
@@ -37,4 +37,4 @@ const DashBoard = () => {
     </div>
   )
 }
-export default DashBoard
+export default Dashboard
