@@ -7,7 +7,7 @@ import ExpiredLogo from "../../assets/images/expired_task_logo.png"
 
 const DashBoard = () => {
   return (
-    <>
+    <div className="dashboard">
       <div className="statuscards">
         <StatusCard
           label="総タスク数"
@@ -34,7 +34,7 @@ const DashBoard = () => {
           variant="expired"
         />
       </div>
-    </>
+    </div>
   )
 }
 export default DashBoard
