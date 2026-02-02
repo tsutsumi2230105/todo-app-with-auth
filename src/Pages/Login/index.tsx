@@ -48,7 +48,7 @@ const Login = () => {
             </div>
 
             <div className="login__action">
-              <SubmitButton isLoading={loading} LoadingText="ログイン中‥">
+              <SubmitButton isLoading={loading} loadingText="ログイン中‥">
                 ログイン
               </SubmitButton>
               <p>
