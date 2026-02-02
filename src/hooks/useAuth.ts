@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth"
 import { auth } from "../utils/firebase"
 
 type UseAuth = () => {
@@ -10,12 +13,16 @@ type UseAuth = () => {
   password: string
   setPassword: React.Dispatch<React.SetStateAction<string>>
   handleLogin: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
+  passwordConf: string
+  setPasswordConf: React.Dispatch<React.SetStateAction<string>>
+  handleSignup: (e: React.FormEvent) => Promise<void>
 }
 
 export const useAuth: UseAuth = () => {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordConf, setPasswordConf] = useState("")
   const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +39,27 @@ export const useAuth: UseAuth = () => {
     }
   }
 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password !== passwordConf) {
+      alert("パスワードが一致しません。")
+      return
+    } else if (password.length < 8) {
+      alert("パスワードは8文字以上で入力してください。")
+      return
+    }
+    try {
+      setLoading(true)
+      await createUserWithEmailAndPassword(auth, email, password)
+      alert("アカウントを作成しました。")
+      navigate("/dashboard")
+    } catch (error) {
+      alert("アカウント作成に失敗しました。")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return {
     loading,
     email,
@@ -39,5 +67,8 @@ export const useAuth: UseAuth = () => {
     password,
     setPassword,
     handleLogin,
+    passwordConf,
+    setPasswordConf,
+    handleSignup,
   }
 }
