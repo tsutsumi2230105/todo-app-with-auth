@@ -6,6 +6,8 @@ type AuthFieldProps = {
   name: string
   type: "email" | "password" | "text"
   placeholder?: string
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const AuthField = ({
@@ -14,6 +16,8 @@ const AuthField = ({
   name,
   type = "text",
   placeholder,
+  value,
+  onChange,
 }: AuthFieldProps) => {
   return (
     <div className="auth-field">
@@ -26,6 +30,8 @@ const AuthField = ({
         name={name}
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </div>
   )
