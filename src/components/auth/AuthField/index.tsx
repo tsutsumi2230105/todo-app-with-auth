@@ -6,8 +6,8 @@ type AuthFieldProps = {
   name: string
   type: "email" | "password" | "text"
   placeholder?: string
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const AuthField = ({

@@ -3,7 +3,7 @@ import "./SubmitButton.scss"
 type SubmitButtonProps = {
   children: React.ReactNode
   isLoading: boolean
-  loadingText: string
+  loadingText?: string
 }
 
 const SubmitButton = ({
