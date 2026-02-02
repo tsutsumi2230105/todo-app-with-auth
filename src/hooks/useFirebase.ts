@@ -23,7 +23,7 @@ export const useFirebase: UseFirebase = () => {
     e.preventDefault()
     setLoading(true)
     try {
-      const userLogin = await signInWithEmailAndPassword(auth, email, password)
+      await signInWithEmailAndPassword(auth, email, password)
       alert("ログインに成功しました。")
       navigate("/dashboard")
     } catch (error) {
