@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../utils/firebase"
 
-type UseFirebase = () => {
+type UseAuth = () => {
   loading: boolean
   email: string
   setEmail: React.Dispatch<React.SetStateAction<string>>
@@ -12,7 +12,7 @@ type UseFirebase = () => {
   handleLogin: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 }
 
-export const useFirebase: UseFirebase = () => {
+export const useAuth: UseAuth = () => {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")

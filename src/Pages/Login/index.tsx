@@ -2,13 +2,13 @@ import AuthHeader from "../../components/auth/AuthHeader"
 import SubmitButton from "../../components/auth/SubmitButton"
 import AuthField from "../../components/auth/AuthField"
 import { Link } from "react-router-dom"
-import { useFirebase } from "../../hooks/useFirebase"
+import { useAuth } from "../../hooks/useAuth"
 
 import "./Login.scss"
 
 const Login = () => {
   const { loading, email, setEmail, password, setPassword, handleLogin } =
-    useFirebase()
+    useAuth()
 
   return (
     <div className="login">
