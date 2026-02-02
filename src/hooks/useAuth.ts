@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth"
 import { auth } from "../utils/firebase"
+import { FirebaseError } from "firebase/app"
 
 type UseAuth = () => {
   loading: boolean
@@ -54,7 +55,11 @@ export const useAuth: UseAuth = () => {
       alert("アカウントを作成しました。")
       navigate("/dashboard")
     } catch (error) {
-      alert("アカウント作成に失敗しました。")
+      if (error instanceof FirebaseError) {
+        alert("このメールアドレスはすでに使われています。")
+      } else {
+        alert("アカウント作成に失敗しました")
+      }
     } finally {
       setLoading(false)
     }
