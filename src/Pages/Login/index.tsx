@@ -48,7 +48,9 @@ const Login = () => {
             </div>
 
             <div className="login__action">
-              <SubmitButton isLoading={loading}>ログイン</SubmitButton>
+              <SubmitButton isLoading={loading} LoadingText="ログイン中‥">
+                ログイン
+              </SubmitButton>
               <p>
                 アカウントをお持ちでない方は
                 <Link to="/signup" className="login__link">
