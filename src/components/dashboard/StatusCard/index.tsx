@@ -26,7 +26,7 @@ const StatusCard = ({
           <div
             className={`statuscard__icon-bg statuscard__icon-bg--${variant}`}
           >
-            <img src={iconSrc} alt="" />
+            <img src={iconSrc} alt="ステータスアイコン" />
           </div>
         </div>
       </div>
