@@ -16,7 +16,7 @@ type UseAuth = () => {
   handleLogin: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
   passwordConf: string
   setPasswordConf: React.Dispatch<React.SetStateAction<string>>
-  handleSignup: (e: React.FormEvent) => Promise<void>
+  handleSignup: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 }
 
 export const useAuth: UseAuth = () => {
