@@ -1,3 +1,22 @@
+.dashboard {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #ffffff;
+}
+
+.dashboard-contents {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-todo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .statuscards {
   display: flex;
   flex-direction: row;
@@ -6,10 +25,18 @@
   justify-content: center;
 }
 
-.dashboard {
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: #ffffff;
+.todorest {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #717182;
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 @media (max-width: 727px) {
