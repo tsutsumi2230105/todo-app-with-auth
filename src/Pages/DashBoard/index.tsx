@@ -1,9 +1,16 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
+import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
+import { useAuth } from "../../hooks/useAuth"
 
 const Dashboard = () => {
+  const { handleLogout } = useAuth()
   return (
     <div className="dashboard">
+      <div className="dashboard_logout">
+        <img src={LogoutIcon} alt="ログアウトアイコン" />
+        <button onClick={handleLogout}>ログアウト</button>
+      </div>
       <div className="statuscards">
         <StatusCard label="総タスク数" value={5} variant="all" />
         <StatusCard label="進行中" value={3} variant="active" />

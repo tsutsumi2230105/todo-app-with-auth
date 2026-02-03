@@ -17,6 +17,7 @@ type UseAuth = () => {
   passwordConf: string
   setPasswordConf: React.Dispatch<React.SetStateAction<string>>
   handleSignup: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
+  handleLogout: () => Promise<void>
 }
 
 export const useAuth: UseAuth = () => {
@@ -74,6 +75,19 @@ export const useAuth: UseAuth = () => {
     }
   }
 
+  const handleLogout = async () => {
+    setLoading(true)
+    try {
+      await auth.signOut()
+      alert("ログアウトしました。")
+      navigate("/login")
+    } catch (error) {
+      alert("ログアウトに失敗しました。")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return {
     loading,
     email,
@@ -84,5 +98,6 @@ export const useAuth: UseAuth = () => {
     passwordConf,
     setPasswordConf,
     handleSignup,
+    handleLogout,
   }
 }
