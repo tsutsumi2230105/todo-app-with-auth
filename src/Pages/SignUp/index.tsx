@@ -60,7 +60,9 @@ const SignUp = () => {
             </div>
 
             <div className="signup__action">
-              <SubmitButton isLoading={loading}>サインアップ</SubmitButton>
+              <SubmitButton isLoading={loading} loadingText="サインアップ中‥">
+                サインアップ
+              </SubmitButton>
               <p>
                 すでにアカウントをお持ちの方は
                 <Link to="/login" className="signup__link">
