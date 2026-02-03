@@ -69,6 +69,8 @@ export const useAuth: UseAuth = () => {
       } else {
         alert("予期しないエラーが発生しました。")
       }
+    } finally {
+      setLoading(false)
     }
   }
 
