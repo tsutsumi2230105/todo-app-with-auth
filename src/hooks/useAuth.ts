@@ -56,12 +56,19 @@ export const useAuth: UseAuth = () => {
       navigate("/dashboard")
     } catch (error) {
       if (error instanceof FirebaseError) {
-        alert("このメールアドレスはすでに使われています。")
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            alert("このメールアドレスはすでに使われています。")
+            break
+          case "auth/invalid-email":
+            alert("メールアドレスの形式が正しくありません。")
+            break
+          default:
+            alert("アカウントの作成に失敗しました。")
+        }
       } else {
-        alert("アカウント作成に失敗しました")
+        alert("予期しないエラーが発生しました。")
       }
-    } finally {
-      setLoading(false)
     }
   }
 
