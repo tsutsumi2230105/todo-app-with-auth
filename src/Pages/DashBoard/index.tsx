@@ -9,9 +9,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <div className="dashboard_contents">
         <header className="dashboard_header">
-          <div className="dashboard_title">
-            <h1>TODOリスト</h1>
-          </div>
+          <h1 className="dashboard_title">TODOリスト</h1>
           <div className="dashboard_logout">
             <button onClick={handleLogout}>
               <img src={LogoutIcon} alt="ログアウトアイコン" />
