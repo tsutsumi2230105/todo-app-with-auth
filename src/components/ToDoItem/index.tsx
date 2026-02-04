@@ -44,7 +44,6 @@ const ToDoItem = ({ label }: DashBoardToDoProps) => {
             <div className="todo__label--progress">
               <p>進行中</p>
             </div>
-            {/* 優先度バッジ */}
             <div className="todo__label--high">
               <p>優先度:高</p>
             </div>
