@@ -13,8 +13,10 @@ const Dashboard = () => {
             <h1>TODOリスト</h1>
           </div>
           <div className="dashboard_logout">
-            <img src={LogoutIcon} alt="ログアウトアイコン" />
-            <button onClick={handleLogout}>ログアウト</button>
+            <button onClick={handleLogout}>
+              <img src={LogoutIcon} alt="ログアウトアイコン" />
+              <span>ログアウト</span>
+            </button>
           </div>
         </header>
         <div className="statuscards">
