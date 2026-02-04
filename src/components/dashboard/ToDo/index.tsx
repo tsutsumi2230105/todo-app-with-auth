@@ -1,9 +1,9 @@
 import "./ToDo.scss"
 import { useId, useState } from "react"
-import CheckBoxBlank from "./../../assets/images/checkbox_blank.png"
-import CheckBoxFilled from "./../../assets/images/checkbox_filled.png"
-import EditIcon from "./../../assets/images/edit.png"
-import DeleteIcon from "./../../assets/images/delete.png"
+import CheckBoxBlank from "../../../assets/images/checkbox_blank.png"
+import CheckBoxFilled from "../../../assets/images/checkbox_filled.png"
+import EditIcon from "../../../assets/images/edit.png"
+import DeleteIcon from "../../../assets/images/delete.png"
 
 type DashBoardToDoProps = {
   label: string

@@ -1,5 +1,6 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
-import ToDo from "../../components/ToDo/"
+import AddToDo from "../../components/dashboard/AddToDo"
+import ToDo from "../../components/dashboard/ToDo"
 import "./Dashboard.scss"
 
 const Dashboard = () => {
@@ -17,6 +18,7 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard__todo">
+            <AddToDo />
             <div className="todorest">
               <p>5件のタスクを表示中</p>
             </div>
