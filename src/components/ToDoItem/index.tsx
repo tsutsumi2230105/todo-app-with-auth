@@ -44,16 +44,26 @@ const ToDoItem = ({ label }: DashBoardToDoProps) => {
             <div className="todo__label--progress">
               <p>進行中</p>
             </div>
+            {/* 優先度バッジ */}
+            <div className="todo__label--high">
+              <p>優先度:高</p>
+            </div>
+            <div className="todo__label--middle">
+              <p>優先度:中</p>
+            </div>
+            <div className="todo__label--low">
+              <p>優先度:低</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="todo__icons">
-          <div className="todo__icon--edit">
-            <img src={EditIcon} alt="編集" />
-          </div>
-          <div className="todo__icon--delete">
-            <img src={DeleteIcon} alt="削除" />
-          </div>
+      <div className="todo__icons">
+        <div className="todo__icon--edit">
+          <img src={EditIcon} alt="編集" />
+        </div>
+        <div className="todo__icon--delete">
+          <img src={DeleteIcon} alt="削除" />
         </div>
       </div>
     </div>

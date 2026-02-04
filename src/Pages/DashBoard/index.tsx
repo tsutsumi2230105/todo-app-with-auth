@@ -1,5 +1,5 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
-import ToDoItem from "../../components/ToDo/"
+import ToDoItem from "../../components/ToDoItem"
 import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
