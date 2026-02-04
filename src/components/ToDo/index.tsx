@@ -22,7 +22,6 @@ const ToDo = ({ label }: DashBoardToDoProps) => {
             id={checkboxId}
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
-            className="todo__checkbox--input"
           />
           <label htmlFor={checkboxId} className="todo__checkbox--label">
             <img
