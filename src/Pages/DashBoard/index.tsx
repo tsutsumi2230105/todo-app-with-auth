@@ -1,8 +1,10 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
 import ToDo from "../../components/ToDo/"
 import "./Dashboard.scss"
+import { useAuth } from "../../hooks/useAuth"
 
 const Dashboard = () => {
+  const { handleLogout } = useAuth()
   return (
     <>
       <div className="dashboard">
