@@ -7,10 +7,10 @@ const Dashboard = () => {
   const { handleLogout } = useAuth()
   return (
     <div className="dashboard">
-      <div className="dashboard_contents">
-        <header className="dashboard_header">
-          <h1 className="dashboard_title">TODOリスト</h1>
-          <div className="dashboard_logout">
+      <div className="dashboard__contents">
+        <header className="dashboard__header">
+          <h1 className="dashboard__title">TODOリスト</h1>
+          <div className="dashboard__logout">
             <button onClick={handleLogout}>
               <img src={LogoutIcon} alt="ログアウトアイコン" />
               <span>ログアウト</span>

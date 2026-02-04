@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
 
-  &_contents {
+  &__contents {
     width: 1280px;
     background-color: #ffffff;
     display: flex;
@@ -14,20 +14,20 @@
     margin: 16px 32px;
   }
 
-  &_header {
+  &__header {
     display: flex;
     flex-direction: row;
     margin-top: 32px;
   }
 
-  &_title {
+  &__title {
     font-weight: 500;
     font-size: 30px;
     line-height: 36px;
     letter-spacing: 0.4px;
   }
 
-  &_logout {
+  &__logout {
     width: 120px;
     height: 36px;
     border-radius: 8px;
@@ -48,7 +48,7 @@
   }
 
   @media (max-width: 832px) {
-    &_contents {
+    &__contents {
       width: 308px;
       margin: 16px;
     }
