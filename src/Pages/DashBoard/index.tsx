@@ -21,8 +21,8 @@ const Dashboard = () => {
               <p>5件のタスクを表示中</p>
             </div>
             <div className="todos">
-              <ToDo />
-              <ToDo />
+              <ToDo label="ReactRouterを学ぶ" />
+              <ToDo label="テスト" />
             </div>
           </div>
         </div>

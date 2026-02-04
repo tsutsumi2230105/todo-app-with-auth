@@ -5,14 +5,11 @@ import CheckBoxFilled from "./../../assets/images/checkbox_filled.png"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 
-type Variant = "high" | "middle" | "low" | "completed"
-
 type DashBoardToDoProps = {
-  label?: string
-  variant?: Variant
+  label: string
 }
 
-const ToDo = ({}: DashBoardToDoProps) => {
+const ToDo = ({ label }: DashBoardToDoProps) => {
   const [checked, setChecked] = useState(false)
   const checkboxId = useId()
 
@@ -38,7 +35,7 @@ const ToDo = ({}: DashBoardToDoProps) => {
 
         <div className="todo__main">
           <div className="todo__title">
-            <p>ReactRouterを学ぶ</p>
+            <p>{label}</p>
           </div>
 
           <div className="todo__labels">
