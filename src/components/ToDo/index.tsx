@@ -9,7 +9,7 @@ type DashBoardToDoProps = {
   label: string
 }
 
-const ToDo = ({ label }: DashBoardToDoProps) => {
+const ToDoItem = ({ label }: DashBoardToDoProps) => {
   const [checked, setChecked] = useState(false)
   const checkboxId = useId()
 
@@ -60,4 +60,4 @@ const ToDo = ({ label }: DashBoardToDoProps) => {
   )
 }
 
-export default ToDo
+export default ToDoItem

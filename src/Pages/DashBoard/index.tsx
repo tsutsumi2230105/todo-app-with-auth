@@ -1,5 +1,5 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
-import ToDo from "../../components/ToDo/"
+import ToDoItem from "../../components/ToDo/"
 import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
@@ -30,9 +30,9 @@ const Dashboard = () => {
           <div className="todorest">
             <p>5件のタスクを表示中</p>
           </div>
-          <div className="todos">
-            <ToDo label="ReactRouterを学ぶ" />
-            <ToDo label="テスト" />
+          <div className="todo__items">
+            <ToDoItem label="ReactRouterを学ぶ" />
+            <ToDoItem label="テスト" />
           </div>
         </div>
       </div>
