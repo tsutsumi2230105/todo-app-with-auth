@@ -1,12 +1,24 @@
 import StatusCard from "../../components/dashboard/StatusCard/"
 import ToDo from "../../components/ToDo/"
+import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
+import { useAuth } from "../../hooks/useAuth"
 
 const Dashboard = () => {
+  const { handleLogout } = useAuth()
   return (
     <>
       <div className="dashboard">
         <div className="dashboard__contents">
+          <header className="dashboard__header">
+            <h1 className="dashboard__title">TODOリスト</h1>
+            <div className="dashboard__logout">
+              <button onClick={handleLogout}>
+                <img src={LogoutIcon} alt="ログアウトアイコン" />
+                <span>ログアウト</span>
+              </button>
+            </div>
+          </header>
           <div className="dashboard__statuscard">
             <div className="statuscards">
               <StatusCard label="総タスク数" value={5} variant="all" />
@@ -15,7 +27,6 @@ const Dashboard = () => {
               <StatusCard label="期限切れ" value={0} variant="expired" />
             </div>
           </div>
-
           <div className="dashboard__todo">
             <div className="todorest">
               <p>5件のタスクを表示中</p>
