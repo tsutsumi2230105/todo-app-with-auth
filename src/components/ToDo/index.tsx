@@ -18,44 +18,44 @@ const ToDo = ({}: DashBoardToDoProps) => {
 
   return (
     <div className={`todo ${checked ? "todo--checked" : ""}`}>
-      <div className="todo-content">
-        <div className="todo-checkbox">
+      <div className="todo__content">
+        <div className="todo__checkbox">
           <input
             type="checkbox"
             id={checkboxId}
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
-            className="todo-checkbox__input"
+            className="todo__checkbox--input"
           />
-          <label htmlFor={checkboxId} className="todo-checkbox__label">
+          <label htmlFor={checkboxId} className="todo__checkbox--label">
             <img
               src={checked ? CheckBoxFilled : CheckBoxBlank}
               alt={checked ? "完了" : "未完了"}
-              className="todo-checkbox__img"
+              className="todo__checkbox-img"
             />
           </label>
         </div>
 
-        <div className="todo-main">
-          <div className="todo-title">
+        <div className="todo__main">
+          <div className="todo__title">
             <p>ReactRouterを学ぶ</p>
           </div>
 
-          <div className="todo-label">
-            <div className="todo-completed">
+          <div className="todo__labels">
+            <div className="todo__label--completed">
               <p>完了</p>
             </div>
-            <div className="todo-progress">
+            <div className="todo__label--progress">
               <p>進行中</p>
             </div>
           </div>
         </div>
 
         <div className="todo__icons">
-          <div className="todo-edit__icon">
+          <div className="todo__icon--edit">
             <img src={EditIcon} alt="編集" />
           </div>
-          <div className="todo-delete__icon">
+          <div className="todo__icon--delete">
             <img src={DeleteIcon} alt="削除" />
           </div>
         </div>

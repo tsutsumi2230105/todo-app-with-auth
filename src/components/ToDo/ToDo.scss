@@ -1,110 +1,103 @@
 .todo {
-  width: 954px;
-  height: 100px;
+  width: 100%;
   border-radius: 14px;
-  border: 1px solid#D1D5DC;
-  padding: 16px 24px 24px 24px;
+  border: 1px solid #d1d5dc;
+  padding: 16px 24px 24px;
   background-color: #f9fafb;
-}
 
-.todo-content {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
+  &__content {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
 
-// チェックボックス
-.todo-check {
-  display: none;
-}
-.todo-checkbox {
-  width: 24px;
-  height: 24px;
-}
+  &__check {
+    display: none;
+  }
 
-// メイン部
-// 一旦固定値で
-.todo-main {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  &__checkbox {
+    width: 24px;
+    height: 24px;
+  }
 
-.todo-title {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: -0.44px;
-}
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.todo-label {
-  display: flex;
-  flex-direction: row;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0px;
-  gap: 8px;
-}
+  &__title {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.44px;
 
-//ラベル達
+    p {
+      margin: 0;
+    }
+  }
 
-// アイコン達
-.todo__icons {
-  margin-left: auto;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  width: 72px;
-  height: 32px;
-}
+  &__labels {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0;
+  }
 
-.todo-edit__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-}
+  &__icons {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 72px;
+    height: 32px;
+  }
 
-.todo-delete__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-}
+  &__icon {
+    &--edit,
+    &--delete {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+  }
 
-// チェックした時の処理
-.todo--checked .todo-title p {
-  text-decoration: line-through;
-  color: #6a7282;
-}
-.todo--checked .todo-progress {
-  display: none;
-}
+  &__label {
+    &--completed {
+      display: none;
+      width: 42px;
+      height: 22px;
+      border-radius: 8px;
+      padding: 2px 8px;
+      background: #dbeafe;
+      border: 1px solid #bedbff;
+    }
 
-.todo--checked .todo-completed {
-  display: block;
-}
+    &--progress {
+      width: 54px;
+      height: 22px;
+      border-radius: 8px;
+      padding: 2px 8px;
+      background: #f3e8ff;
+      border: 1px solid #e9d4ff;
+    }
+  }
+  &--checked {
+    .todo__title p {
+      text-decoration: line-through;
+      color: #6a7282;
+    }
 
-.todo-completed {
-  display: none;
-  width: 42px;
-  height: 22px;
-  border-radius: 8px;
-  padding: 2px 8px;
-  background: #dbeafe;
-  border: 1px solid #bedbff;
-  //   font-weight: 500;
-  //   font-size: 12px;
-  //   line-height: 16px;
-  //   letter-spacing: 0px;
-}
+    .todo__label--progress {
+      display: none;
+    }
 
-.todo-progress {
-  width: 54px;
-  height: 22px;
-  border-radius: 8px;
-  padding: 2px 8px;
-  background: #f3e8ff;
-  border: 1px solid #e9d4ff;
+    .todo__label--completed {
+      display: block;
+    }
+  }
 }

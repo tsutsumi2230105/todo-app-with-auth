@@ -6,8 +6,8 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
-        <div className="dashboard-contents">
-          <div className="dashboard-statuscard">
+        <div className="dashboard__contents">
+          <div className="dashboard__statuscard">
             <div className="statuscards">
               <StatusCard label="総タスク数" value={5} variant="all" />
               <StatusCard label="進行中" value={3} variant="active" />
@@ -16,7 +16,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="dashboard-todo">
+          <div className="dashboard__todo">
             <div className="todorest">
               <p>5件のタスクを表示中</p>
             </div>
