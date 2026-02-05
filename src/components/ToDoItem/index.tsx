@@ -1,28 +1,25 @@
 import "./ToDo.scss"
-import { useId, useState } from "react"
+import { useId } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
-
-type Priority = "high" | "middle" | "low"
+import type { Todo } from "../../types/todo"
 
 type ToDoItemProps = {
-  label: string
-  priority: Priority
+  todo: Todo
+  onToggle: (id: string) => void
 }
 
-const ToDoItem = ({ label, priority }: ToDoItemProps) => {
-  const [checked, setChecked] = useState(false)
+const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   const checkboxId = useId()
-
   return (
-    <div className={`todo ${checked ? "todo--checked" : ""}`}>
+    <div className={`todo ${todo.completed ? "todo--checked" : ""}`}>
       <div className="todo__content">
         <div className="todo__checkbox">
           <input
             type="checkbox"
             id={checkboxId}
-            checked={checked}
-            onChange={(e) => setChecked(e.target.checked)}
+            checked={todo.completed}
+            onChange={() => onToggle(todo.id)}
             className="todo__check"
           />
           <label htmlFor={checkboxId} className="todo__checkbox-box">
@@ -32,7 +29,7 @@ const ToDoItem = ({ label, priority }: ToDoItemProps) => {
 
         <div className="todo__main">
           <div className="todo__title">
-            <p>{label}</p>
+            <p>{todo.title}</p>
           </div>
 
           <div className="todo__labels">
@@ -42,12 +39,12 @@ const ToDoItem = ({ label, priority }: ToDoItemProps) => {
             <div className="todo__label--progress">
               <p>進行中</p>
             </div>
-            <div className={`todo__label--${priority}`}>
+            <div className={`todo__label--${todo.priority}`}>
               <p>
                 優先度:
-                {priority === "high"
+                {todo.priority === "high"
                   ? "高"
-                  : priority === "middle"
+                  : todo.priority === "middle"
                     ? "中"
                     : "低"}
               </p>

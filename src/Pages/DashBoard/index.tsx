@@ -1,11 +1,45 @@
+import { useState } from "react"
 import StatusCard from "../../components/dashboard/StatusCard/"
 import ToDoItem from "../../components/ToDoItem"
 import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
+import type { Todo } from "../../types/todo"
+
+const MockTodo: Todo[] = [
+  {
+    id: "1",
+    title: "テスト1",
+    completed: false,
+    status: "progress",
+    priority: "high",
+  },
+  {
+    id: "2",
+    title: "テスト2",
+    completed: true,
+    status: "done",
+    priority: "middle",
+  },
+  {
+    id: "3",
+    title: "テスト3",
+    completed: false,
+    status: "progress",
+    priority: "low",
+  },
+]
 
 const Dashboard = () => {
   const { handleLogout } = useAuth()
+  const [todos, setTodos] = useState<Todo[]>(MockTodo)
+  const toggleTodo = (id: string) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
+  }
   return (
     <div className="dashboard">
       <div className="dashboard__contents">
@@ -28,12 +62,12 @@ const Dashboard = () => {
         </div>
         <div className="dashboard__todo">
           <div className="todorest">
-            <p>5件のタスクを表示中</p>
+            <p>{todos.length}件のタスクを表示中</p>
           </div>
           <div className="todo__items">
-            <ToDoItem label="ReactRouterを学ぶ" priority="high" />
-            <ToDoItem label="テスト" priority="middle" />
-            <ToDoItem label="適当なタスク" priority="low" />
+            {todos.map((todo) => (
+              <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+            ))}
           </div>
         </div>
       </div>
