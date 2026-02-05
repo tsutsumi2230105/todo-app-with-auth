@@ -11,21 +11,18 @@ const MockTodo: Todo[] = [
     id: "1",
     title: "テスト1",
     completed: false,
-    status: "progress",
     priority: "high",
   },
   {
     id: "2",
     title: "テスト2",
     completed: true,
-    status: "done",
     priority: "middle",
   },
   {
     id: "3",
     title: "テスト3",
     completed: false,
-    status: "progress",
     priority: "low",
   },
 ]
