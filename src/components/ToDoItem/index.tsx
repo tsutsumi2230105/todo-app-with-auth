@@ -57,10 +57,14 @@ const ToDoItem = ({ label, priority }: ToDoItemProps) => {
 
         <div className="todo__icons">
           <div className="todo__icon--edit">
-            <img src={EditIcon} alt="編集" />
+            <button>
+              <img src={EditIcon} alt="編集" />
+            </button>
           </div>
           <div className="todo__icon--delete">
-            <img src={DeleteIcon} alt="削除" />
+            <button>
+              <img src={DeleteIcon} alt="削除" />
+            </button>
           </div>
         </div>
       </div>
