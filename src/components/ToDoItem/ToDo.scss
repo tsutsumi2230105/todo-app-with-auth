@@ -35,10 +35,10 @@
   &__check:checked + &__checkbox-box {
     background: #00c950;
     border-color: #00c950;
-  }
 
-  &__check:checked + &__checkbox-box &__checkbox-check {
-    display: block;
+    &__checkbox-check {
+      display: block;
+    }
   }
 
   &__main {
