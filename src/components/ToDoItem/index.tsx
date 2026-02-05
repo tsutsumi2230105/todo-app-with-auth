@@ -1,7 +1,5 @@
 import "./ToDo.scss"
 import { useId, useState } from "react"
-import CheckBoxBlank from "./../../assets/images/checkbox_blank.png"
-import CheckBoxFilled from "./../../assets/images/checkbox_filled.png"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 
@@ -22,13 +20,10 @@ const ToDoItem = ({ label }: ToDoItemProps) => {
             id={checkboxId}
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
+            className="todo__check"
           />
-          <label htmlFor={checkboxId} className="todo__checkbox--label">
-            <img
-              src={checked ? CheckBoxFilled : CheckBoxBlank}
-              alt={checked ? "完了" : "未完了"}
-              className="todo__checkbox-img"
-            />
+          <label htmlFor={checkboxId} className="todo__checkbox-box">
+            <span className="todo__checkbox-check">✓</span>
           </label>
         </div>
 

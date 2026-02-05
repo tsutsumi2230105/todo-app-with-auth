@@ -15,9 +15,30 @@
     display: none;
   }
 
-  &__checkbox {
+  &__checkbox-box {
     width: 24px;
     height: 24px;
+    border-radius: 4px;
+    border: 2px solid #d1d5dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__checkbox-check {
+    display: none;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  &__check:checked + &__checkbox-box {
+    background: #00c950;
+    border-color: #00c950;
+  }
+
+  &__check:checked + &__checkbox-box &__checkbox-check {
+    display: block;
   }
 
   &__main {
