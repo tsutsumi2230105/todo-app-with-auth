@@ -5,11 +5,11 @@ import CheckBoxFilled from "./../../assets/images/checkbox_filled.png"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 
-type DashBoardToDoProps = {
+type ToDoItemProps = {
   label: string
 }
 
-const ToDoItem = ({ label }: DashBoardToDoProps) => {
+const ToDoItem = ({ label }: ToDoItemProps) => {
   const [checked, setChecked] = useState(false)
   const checkboxId = useId()
 
