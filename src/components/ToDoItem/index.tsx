@@ -55,14 +55,14 @@ const ToDoItem = ({ label }: ToDoItemProps) => {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="todo__icons">
-        <div className="todo__icon--edit">
-          <img src={EditIcon} alt="編集" />
-        </div>
-        <div className="todo__icon--delete">
-          <img src={DeleteIcon} alt="削除" />
+        <div className="todo__icons">
+          <div className="todo__icon--edit">
+            <img src={EditIcon} alt="編集" />
+          </div>
+          <div className="todo__icon--delete">
+            <img src={DeleteIcon} alt="削除" />
+          </div>
         </div>
       </div>
     </div>
