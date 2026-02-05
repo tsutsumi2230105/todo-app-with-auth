@@ -3,11 +3,14 @@ import { useId, useState } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 
+type Priority = "high" | "middle" | "low"
+
 type ToDoItemProps = {
   label: string
+  priority: Priority
 }
 
-const ToDoItem = ({ label }: ToDoItemProps) => {
+const ToDoItem = ({ label, priority }: ToDoItemProps) => {
   const [checked, setChecked] = useState(false)
   const checkboxId = useId()
 
@@ -39,14 +42,15 @@ const ToDoItem = ({ label }: ToDoItemProps) => {
             <div className="todo__label--progress">
               <p>進行中</p>
             </div>
-            <div className="todo__label--high">
-              <p>優先度:高</p>
-            </div>
-            <div className="todo__label--middle">
-              <p>優先度:中</p>
-            </div>
-            <div className="todo__label--low">
-              <p>優先度:低</p>
+            <div className={`todo__label--${priority}`}>
+              <p>
+                優先度:
+                {priority === "high"
+                  ? "高"
+                  : priority === "middle"
+                    ? "中"
+                    : "低"}
+              </p>
             </div>
           </div>
         </div>

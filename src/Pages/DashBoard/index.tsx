@@ -31,8 +31,9 @@ const Dashboard = () => {
             <p>5件のタスクを表示中</p>
           </div>
           <div className="todo__items">
-            <ToDoItem label="ReactRouterを学ぶ" />
-            <ToDoItem label="テスト" />
+            <ToDoItem label="ReactRouterを学ぶ" priority="high" />
+            <ToDoItem label="テスト" priority="middle" />
+            <ToDoItem label="適当なタスク" priority="low" />
           </div>
         </div>
       </div>
