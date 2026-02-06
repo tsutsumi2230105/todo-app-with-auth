@@ -48,6 +48,14 @@ const Dashboard = () => {
     (value) => value !== "all"
   ).length
 
+  const filteredTodos = todos.filter((todo) => {
+    if (filters.status === "active" && todo.completed) return false
+    if (filters.status === "done" && !todo.completed) return false
+    if (filters.priority !== "all" && todo.priority !== filters.priority)
+      return false
+    return true
+  })
+
   return (
     <div className="dashboard">
       <div className="dashboard__contents">
@@ -71,10 +79,10 @@ const Dashboard = () => {
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
             <div className="todorest">
-              <p>{todos.length}件のタスクを表示中</p>
+              <p>{filteredTodos.length}件のタスクを表示中</p>
             </div>
             <div className="todo__items">
-              {todos.map((todo) => (
+              {filteredTodos.map((todo) => (
                 <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
               ))}
             </div>
