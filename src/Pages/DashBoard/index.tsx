@@ -14,18 +14,21 @@ const MockTodo: Todo[] = [
     title: "テスト1",
     completed: false,
     priority: "high",
+    dueDate: "2026-02-05",
   },
   {
     id: "2",
     title: "テスト2",
     completed: true,
     priority: "middle",
+    dueDate: "2026-02-06",
   },
   {
     id: "3",
     title: "テスト3",
     completed: false,
     priority: "low",
+    dueDate: "2026-02-07",
   },
 ]
 
@@ -49,11 +52,32 @@ const Dashboard = () => {
     (value) => value !== "all"
   ).length
 
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
   const filterTodos = todos.filter((todo) => {
     if (filters.status === "uncompleted" && todo.completed) return false
     if (filters.status === "completed" && !todo.completed) return false
     if (filters.priority !== "all" && todo.priority !== filters.priority)
       return false
+    if (filters.limit !== "all") {
+      const dueDate = new Date(todo.dueDate)
+      dueDate.setHours(0, 0, 0, 0)
+
+      if (filters.limit === "expired") {
+        if (dueDate >= today) return false
+      }
+
+      if (filters.limit === "today") {
+        if (dueDate.getTime() !== today.getTime()) return false
+      }
+
+      if (filters.limit === "this-week") {
+        const weekEnd = new Date(today)
+        weekEnd.setDate(today.getDate() + (7 - today.getDay()))
+        if (dueDate < today || dueDate > weekEnd) return false
+      }
+    }
     return true
   })
   const totalCount = todos.length
