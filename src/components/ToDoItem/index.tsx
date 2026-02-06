@@ -7,12 +7,18 @@ import type { Todo } from "../../types/todo"
 type ToDoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
+  isExpired: boolean
 }
 
-const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
+const ToDoItem = ({ todo, onToggle, isExpired }: ToDoItemProps) => {
   const checkboxId = useId()
   return (
-    <div className={`todo ${todo.completed ? "todo--checked" : ""}`}>
+    <div
+      className={`todo
+    ${todo.completed ? "todo--checked" : ""}
+    ${isExpired ? "todo--expired" : ""}
+  `}
+    >
       <div className="todo__content">
         <div className="todo__checkbox">
           <input
@@ -28,8 +34,15 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
         </div>
 
         <div className="todo__main">
-          <div className="todo__title">
-            <p>{todo.title}</p>
+          <div className="todo__title-label">
+            <div className="todo__title">
+              <p>{todo.title}</p>
+            </div>
+            {isExpired && (
+              <div className="todo__label--expired">
+                <p>期限切れ</p>
+              </div>
+            )}
           </div>
 
           <div className="todo__labels">

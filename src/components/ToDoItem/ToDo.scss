@@ -56,6 +56,12 @@
     p {
       margin: 0;
     }
+    &-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
   }
 
   &__labels {
@@ -95,6 +101,7 @@
       background: #dbeafe;
       border: 1px solid #bedbff;
       color: #193cb8;
+      white-space: nowrap;
     }
 
     &--progress {
@@ -103,6 +110,7 @@
       background: #f3e8ff;
       border: 1px solid #e9d4ff;
       color: #6e11b0;
+      white-space: nowrap;
     }
 
     &--high {
@@ -111,6 +119,7 @@
       background: #ffe2e2;
       border: 1px solid #ffc9c9;
       color: #9f0712;
+      white-space: nowrap;
     }
     &--middle {
       border-radius: 8px;
@@ -118,6 +127,7 @@
       background: #fef9c2;
       border: 1px solid #fff085;
       color: #894b00;
+      white-space: nowrap;
     }
     &--low {
       border-radius: 8px;
@@ -125,6 +135,19 @@
       background: #dcfce7;
       border: 1px solid #b9f8cf;
       color: #016630;
+      white-space: nowrap;
+    }
+    &--expired {
+      border-radius: 8px;
+      padding: 2px 8px;
+      background: #ffe2e2;
+      border: 1px solid #ffc9c9;
+      color: #9f0712;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0px;
+      white-space: nowrap;
     }
   }
   &--checked {
@@ -141,5 +164,9 @@
     .todo__label--completed {
       display: block;
     }
+  }
+  &--expired {
+    border: 1px solid #ff6467;
+    background-color: #fef2f2;
   }
 }
