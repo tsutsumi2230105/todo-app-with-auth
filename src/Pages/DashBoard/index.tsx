@@ -80,10 +80,21 @@ const Dashboard = () => {
     }
     return true
   })
+
+  const isExpired = (dueDate: string) => {
+    const date = new Date(dueDate)
+    date.setHours(0, 0, 0, 0)
+    return date < today
+  }
+
   const totalCount = todos.length
-  const uncompletedCount = todos.filter((todo) => !todo.completed).length
   const completedCount = todos.filter((todo) => todo.completed).length
-  const expiredCount = 0
+  const uncompletedCount = todos.filter(
+    (todo) => !todo.completed && !isExpired(todo.dueDate)
+  ).length
+  const expiredCount = todos.filter(
+    (todo) => !todo.completed && isExpired(todo.dueDate)
+  ).length
 
   return (
     <div className="dashboard">
@@ -124,7 +135,12 @@ const Dashboard = () => {
             </div>
             <div className="todo__items">
               {filterTodos.map((todo) => (
-                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+                <ToDoItem
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={toggleTodo}
+                  isExpired={!todo.completed && isExpired(todo.dueDate)}
+                />
               ))}
             </div>
             {filterTodos.length === 0 && (
