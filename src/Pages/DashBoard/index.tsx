@@ -102,6 +102,11 @@ const Dashboard = () => {
                 <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
               ))}
             </div>
+            {filterTodos.length === 0 && (
+              <div className="todo__no-items">
+                <p>フィルター条件に一致するTODOがありません。</p>
+              </div>
+            )}
           </div>
           {/* ここからはフィルター */}
           <div className="dashboard-filter">
