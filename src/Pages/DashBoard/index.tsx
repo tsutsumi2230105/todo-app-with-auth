@@ -48,9 +48,9 @@ const Dashboard = () => {
     (value) => value !== "all"
   ).length
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filters.status === "active" && todo.completed) return false
-    if (filters.status === "done" && !todo.completed) return false
+  const filterTodos = todos.filter((todo) => {
+    if (filters.status === "uncompleted" && todo.completed) return false
+    if (filters.status === "completed" && !todo.completed) return false
     if (filters.priority !== "all" && todo.priority !== filters.priority)
       return false
     return true
@@ -71,18 +71,18 @@ const Dashboard = () => {
         <div className="dashboard__statuscard">
           <div className="statuscards">
             <StatusCard label="総タスク数" value={5} variant="all" />
-            <StatusCard label="進行中" value={3} variant="active" />
-            <StatusCard label="完了済み" value={2} variant="done" />
+            <StatusCard label="進行中" value={3} variant="uncompleted" />
+            <StatusCard label="完了済み" value={2} variant="completed" />
             <StatusCard label="期限切れ" value={0} variant="expired" />
           </div>
         </div>
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
             <div className="todorest">
-              <p>{filteredTodos.length}件のタスクを表示中</p>
+              <p>{filterTodos.length}件のタスクを表示中</p>
             </div>
             <div className="todo__items">
-              {filteredTodos.map((todo) => (
+              {filterTodos.map((todo) => (
                 <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
               ))}
             </div>
