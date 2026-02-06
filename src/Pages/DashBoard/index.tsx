@@ -130,8 +130,8 @@ const Dashboard = () => {
                   }
                 >
                   <option value="all">すべて</option>
-                  <option value="active">進行中</option>
-                  <option value="done">完了</option>
+                  <option value="uncompleted">進行中</option>
+                  <option value="completed">完了</option>
                 </select>
               </div>
               <div className="dashboard-filter__priority">
