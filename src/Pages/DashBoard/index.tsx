@@ -6,6 +6,7 @@ import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
 import type { Todo } from "../../types/todo"
 import FilterPanel from "../../components/dashboard/FilterPanel"
+import type { Filters } from "../../types/filter"
 
 const MockTodo: Todo[] = [
   {
@@ -38,7 +39,7 @@ const Dashboard = () => {
       )
     )
   }
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     status: "all",
     priority: "all",
     limit: "all",

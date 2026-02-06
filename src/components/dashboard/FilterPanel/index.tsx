@@ -1,11 +1,6 @@
 import Filter from "../../../assets/images/filter.png"
 import "./FilterPanel.scss"
-
-type Filters = {
-  status: string
-  priority: string
-  limit: string
-}
+import type { Filters } from "../../../types/filter"
 
 type Props = {
   filters: Filters
@@ -34,7 +29,12 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             id="status"
             className="dashboard-filter__select"
             value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+            onChange={(e) =>
+              setFilters({
+                ...filters,
+                status: e.target.value as Filters["status"],
+              })
+            }
           >
             <option value="all">すべて</option>
             <option value="uncompleted">進行中</option>
@@ -50,7 +50,10 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             className="dashboard-filter__select"
             value={filters.priority}
             onChange={(e) =>
-              setFilters({ ...filters, priority: e.target.value })
+              setFilters({
+                ...filters,
+                priority: e.target.value as Filters["priority"],
+              })
             }
           >
             <option value="all">すべて</option>
@@ -67,7 +70,12 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             id="limit"
             className="dashboard-filter__select"
             value={filters.limit}
-            onChange={(e) => setFilters({ ...filters, limit: e.target.value })}
+            onChange={(e) =>
+              setFilters({
+                ...filters,
+                limit: e.target.value as Filters["limit"],
+              })
+            }
           >
             <option value="all">すべて</option>
             <option value="expired">期限切れ</option>
