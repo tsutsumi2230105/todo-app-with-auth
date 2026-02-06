@@ -55,6 +55,10 @@ const Dashboard = () => {
       return false
     return true
   })
+  const totalCount = todos.length
+  const uncompletedCount = todos.filter((todo) => !todo.completed).length
+  const completedCount = todos.filter((todo) => todo.completed).length
+  const expiredCount = 0
 
   return (
     <div className="dashboard">
@@ -70,10 +74,22 @@ const Dashboard = () => {
         </header>
         <div className="dashboard__statuscard">
           <div className="statuscards">
-            <StatusCard label="総タスク数" value={5} variant="all" />
-            <StatusCard label="進行中" value={3} variant="uncompleted" />
-            <StatusCard label="完了済み" value={2} variant="completed" />
-            <StatusCard label="期限切れ" value={0} variant="expired" />
+            <StatusCard label="総タスク数" value={totalCount} variant="all" />
+            <StatusCard
+              label="進行中"
+              value={uncompletedCount}
+              variant="uncompleted"
+            />
+            <StatusCard
+              label="完了済み"
+              value={completedCount}
+              variant="completed"
+            />
+            <StatusCard
+              label="期限切れ"
+              value={expiredCount}
+              variant="expired"
+            />
           </div>
         </div>
         <div className="dashboard__view-todo">
