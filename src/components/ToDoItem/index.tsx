@@ -1,5 +1,5 @@
 import "./ToDo.scss"
-import { useId } from "react"
+import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 import type { Todo } from "../../types/todo"
@@ -11,8 +11,25 @@ type ToDoItemProps = {
 
 const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   const checkboxId = useId()
+
+  const today = useMemo(() => {
+    const date = new Date()
+    date.setHours(0, 0, 0, 0)
+    return date
+  }, [])
+
+  const dueDate = new Date(todo.dueDate)
+  dueDate.setHours(0, 0, 0, 0)
+
+  const isExpired = !todo.completed && dueDate < today
+
   return (
-    <div className={`todo ${todo.completed ? "todo--checked" : ""}`}>
+    <div
+      className={`todo
+    ${todo.completed ? "todo--checked" : ""}
+    ${isExpired ? "todo--expired" : ""}
+  `}
+    >
       <div className="todo__content">
         <div className="todo__checkbox">
           <input
@@ -28,8 +45,15 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
         </div>
 
         <div className="todo__main">
-          <div className="todo__title">
-            <p>{todo.title}</p>
+          <div className="todo__title-label">
+            <div className="todo__title">
+              <p>{todo.title}</p>
+            </div>
+            {isExpired && (
+              <div className="todo__label--expired">
+                <p>期限切れ</p>
+              </div>
+            )}
           </div>
 
           <div className="todo__labels">

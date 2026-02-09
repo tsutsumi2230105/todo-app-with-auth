@@ -4,7 +4,7 @@ import ActiveTaskLogo from "../../../assets/images/active_task_logo.png"
 import CompletedLogo from "../../../assets/images/completed_task_logo.png"
 import ExpiredLogo from "../../../assets/images/expired_task_logo.png"
 
-type Variant = "all" | "active" | "done" | "expired"
+type Variant = "all" | "uncompleted" | "completed" | "expired"
 
 type DashBoardStatusCardProps = {
   label: string
@@ -14,8 +14,8 @@ type DashBoardStatusCardProps = {
 
 const IconMap: Record<Variant, string> = {
   all: AllTaskLogo,
-  active: ActiveTaskLogo,
-  done: CompletedLogo,
+  uncompleted: ActiveTaskLogo,
+  completed: CompletedLogo,
   expired: ExpiredLogo,
 }
 

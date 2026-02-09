@@ -5,6 +5,8 @@ import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
 import type { Todo } from "../../types/todo"
+import FilterPanel from "../../components/dashboard/FilterPanel"
+import type { Filters } from "../../types/filter"
 
 const MockTodo: Todo[] = [
   {
@@ -12,18 +14,21 @@ const MockTodo: Todo[] = [
     title: "テスト1",
     completed: false,
     priority: "high",
+    dueDate: "2026-02-05",
   },
   {
     id: "2",
     title: "テスト2",
     completed: true,
     priority: "middle",
+    dueDate: "2026-02-06",
   },
   {
     id: "3",
     title: "テスト3",
     completed: false,
     priority: "low",
+    dueDate: "2026-02-07",
   },
 ]
 
@@ -37,6 +42,60 @@ const Dashboard = () => {
       )
     )
   }
+  const [filters, setFilters] = useState<Filters>({
+    status: "all",
+    priority: "all",
+    limit: "all",
+  })
+
+  const activeFilterCount = Object.values(filters).filter(
+    (value) => value !== "all"
+  ).length
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const filterTodos = todos.filter((todo) => {
+    if (filters.status === "uncompleted" && todo.completed) return false
+    if (filters.status === "completed" && !todo.completed) return false
+    if (filters.priority !== "all" && todo.priority !== filters.priority)
+      return false
+    if (filters.limit !== "all") {
+      const dueDate = new Date(todo.dueDate)
+      dueDate.setHours(0, 0, 0, 0)
+
+      if (filters.limit === "expired") {
+        if (dueDate >= today) return false
+      }
+
+      if (filters.limit === "today") {
+        if (dueDate.getTime() !== today.getTime()) return false
+      }
+
+      if (filters.limit === "this-week") {
+        const weekEnd = new Date(today)
+        weekEnd.setDate(today.getDate() + (7 - today.getDay()))
+        if (dueDate < today || dueDate > weekEnd) return false
+      }
+    }
+    return true
+  })
+
+  const isExpired = (dueDate: string) => {
+    const date = new Date(dueDate)
+    date.setHours(0, 0, 0, 0)
+    return date < today
+  }
+
+  const totalCount = todos.length
+  const completedCount = todos.filter((todo) => todo.completed).length
+  const uncompletedCount = todos.filter(
+    (todo) => !todo.completed && !isExpired(todo.dueDate)
+  ).length
+  const expiredCount = todos.filter(
+    (todo) => !todo.completed && isExpired(todo.dueDate)
+  ).length
+
   return (
     <div className="dashboard">
       <div className="dashboard__contents">
@@ -51,21 +110,45 @@ const Dashboard = () => {
         </header>
         <div className="dashboard__statuscard">
           <div className="statuscards">
-            <StatusCard label="総タスク数" value={5} variant="all" />
-            <StatusCard label="進行中" value={3} variant="active" />
-            <StatusCard label="完了済み" value={2} variant="done" />
-            <StatusCard label="期限切れ" value={0} variant="expired" />
+            <StatusCard label="総タスク数" value={totalCount} variant="all" />
+            <StatusCard
+              label="進行中"
+              value={uncompletedCount}
+              variant="uncompleted"
+            />
+            <StatusCard
+              label="完了済み"
+              value={completedCount}
+              variant="completed"
+            />
+            <StatusCard
+              label="期限切れ"
+              value={expiredCount}
+              variant="expired"
+            />
           </div>
         </div>
-        <div className="dashboard__todo">
-          <div className="todorest">
-            <p>{todos.length}件のタスクを表示中</p>
+        <div className="dashboard__view-todo">
+          <div className="dashboard__todo">
+            <div className="todorest">
+              <p>{filterTodos.length}件のタスクを表示中</p>
+            </div>
+            <div className="todo__items">
+              {filterTodos.map((todo) => (
+                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+              ))}
+            </div>
+            {filterTodos.length === 0 && (
+              <div className="todo__no-items">
+                <p>フィルター条件に一致するTODOがありません。</p>
+              </div>
+            )}
           </div>
-          <div className="todo__items">
-            {todos.map((todo) => (
-              <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
-            ))}
-          </div>
+          <FilterPanel
+            filters={filters}
+            activeFilterCount={activeFilterCount}
+            setFilters={setFilters}
+          />
         </div>
       </div>
     </div>

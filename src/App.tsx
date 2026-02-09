@@ -5,13 +5,11 @@ import Dashboard from "./Pages/DashBoard"
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   )
 }
 
