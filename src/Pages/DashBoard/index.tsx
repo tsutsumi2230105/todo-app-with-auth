@@ -18,6 +18,7 @@ const Dashboard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
+    deleteTodo,
   } = useDashBoard()
 
   return (
@@ -59,7 +60,12 @@ const Dashboard = () => {
             </div>
             <div className="todo__items">
               {filterTodos.map((todo) => (
-                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+                <ToDoItem
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={toggleTodo}
+                  onDelete={deleteTodo}
+                />
               ))}
             </div>
             {filterTodos.length === 0 && (
