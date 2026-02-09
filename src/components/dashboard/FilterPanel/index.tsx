@@ -80,7 +80,7 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             <option value="all">すべて</option>
             <option value="expired">期限切れ</option>
             <option value="today">今日</option>
-            <option value="this_week">今週</option>
+            <option value="this-week">今週</option>
           </select>
         </div>
         {activeFilterCount > 0 && (
