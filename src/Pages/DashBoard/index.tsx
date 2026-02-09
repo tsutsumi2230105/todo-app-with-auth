@@ -135,12 +135,7 @@ const Dashboard = () => {
             </div>
             <div className="todo__items">
               {filterTodos.map((todo) => (
-                <ToDoItem
-                  key={todo.id}
-                  todo={todo}
-                  onToggle={toggleTodo}
-                  isExpired={!todo.completed && isExpired(todo.dueDate)}
-                />
+                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
               ))}
             </div>
             {filterTodos.length === 0 && (

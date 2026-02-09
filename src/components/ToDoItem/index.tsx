@@ -7,11 +7,19 @@ import type { Todo } from "../../types/todo"
 type ToDoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
-  isExpired: boolean
 }
 
-const ToDoItem = ({ todo, onToggle, isExpired }: ToDoItemProps) => {
+const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   const checkboxId = useId()
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const dueDate = new Date(todo.dueDate)
+  dueDate.setHours(0, 0, 0, 0)
+
+  const isExpired = !todo.completed && dueDate < today
+
   return (
     <div
       className={`todo
