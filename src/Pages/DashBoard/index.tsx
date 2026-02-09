@@ -52,6 +52,14 @@ const Dashboard = () => {
     (value) => value !== "all"
   ).length
 
+  const deleteTodo = (id: string) => {
+    const result = confirm("本当に削除してよろしいですか？")
+    if (!result) {
+      return
+    }
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  }
+
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
@@ -139,6 +147,7 @@ const Dashboard = () => {
                   key={todo.id}
                   todo={todo}
                   onToggle={toggleTodo}
+                  onDelete={deleteTodo}
                   isExpired={!todo.completed && isExpired(todo.dueDate)}
                 />
               ))}
