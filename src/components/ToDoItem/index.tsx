@@ -7,10 +7,9 @@ import type { Todo } from "../../types/todo"
 type ToDoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
-  onDelete: (id: string) => void
 }
 
-const ToDoItem = ({ todo, onToggle, onDelete }: ToDoItemProps) => {
+const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   const checkboxId = useId()
 
   const today = useMemo(() => {
@@ -84,7 +83,7 @@ const ToDoItem = ({ todo, onToggle, onDelete }: ToDoItemProps) => {
             </button>
           </div>
           <div className="todo__icon--delete">
-            <button onClick={() => onDelete(todo.id)}>
+            <button>
               <img src={DeleteIcon} alt="削除" />
             </button>
           </div>

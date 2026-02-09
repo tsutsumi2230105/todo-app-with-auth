@@ -83,10 +83,6 @@ export const useDashBoard = () => {
     return date < today
   }
 
-  const deleteTodo = (id: string) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
-  }
-
   const totalCount = todos.length
   const completedCount = todos.filter((todo) => todo.completed).length
   const uncompletedCount = todos.filter(
@@ -107,6 +103,5 @@ export const useDashBoard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
-    deleteTodo,
   }
 }
