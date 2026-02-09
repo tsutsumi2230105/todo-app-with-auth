@@ -5,6 +5,7 @@ import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
 import FilterPanel from "../../components/dashboard/FilterPanel"
 import { useDashBoard } from "../../hooks/useDashBoard.ts"
+import ToDoEdit from "../../components/ToDoEdit"
 
 const Dashboard = () => {
   const { handleLogout } = useAuth()
@@ -57,6 +58,7 @@ const Dashboard = () => {
             <div className="todorest">
               <p>{filterTodos.length}件のタスクを表示中</p>
             </div>
+            <ToDoEdit></ToDoEdit>
             <div className="todo__items">
               {filterTodos.map((todo) => (
                 <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
