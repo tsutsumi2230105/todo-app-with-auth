@@ -1,5 +1,5 @@
 import "./ToDo.scss"
-import { useId } from "react"
+import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 import type { Todo } from "../../types/todo"
@@ -12,8 +12,11 @@ type ToDoItemProps = {
 const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   const checkboxId = useId()
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  const today = useMemo(() => {
+    const date = new Date()
+    date.setHours(0, 0, 0, 0)
+    return date
+  }, [])
 
   const dueDate = new Date(todo.dueDate)
   dueDate.setHours(0, 0, 0, 0)
