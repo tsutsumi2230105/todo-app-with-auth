@@ -9,7 +9,7 @@ import { useDashBoard } from "../../hooks/useDashBoard.ts"
 const Dashboard = () => {
   const { handleLogout } = useAuth()
   const {
-    filterTodos,
+    filteredTodos,
     filters,
     setFilters,
     activeFilterCount,
@@ -55,14 +55,14 @@ const Dashboard = () => {
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
             <div className="todorest">
-              <p>{filterTodos.length}件のタスクを表示中</p>
+              <p>{filteredTodos.length}件のタスクを表示中</p>
             </div>
             <div className="todo__items">
-              {filterTodos.map((todo) => (
+              {filteredTodos.map((todo) => (
                 <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
               ))}
             </div>
-            {filterTodos.length === 0 && (
+            {filteredTodos.length === 0 && (
               <div className="todo__no-items">
                 <p>フィルター条件に一致するTODOがありません。</p>
               </div>

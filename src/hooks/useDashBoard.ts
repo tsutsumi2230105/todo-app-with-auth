@@ -51,7 +51,7 @@ export const useDashBoard = () => {
     return date
   }, [])
 
-  const filterTodos = todos.filter((todo) => {
+  const filteredTodos = todos.filter((todo) => {
     if (filters.status === "uncompleted" && todo.completed) return false
     if (filters.status === "completed" && !todo.completed) return false
     if (filters.priority !== "all" && todo.priority !== filters.priority)
@@ -94,7 +94,7 @@ export const useDashBoard = () => {
 
   return {
     todos,
-    filterTodos,
+    filteredTodos,
     filters,
     setFilters,
     activeFilterCount,
