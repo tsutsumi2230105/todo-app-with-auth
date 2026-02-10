@@ -97,7 +97,6 @@ export const useDashBoard = () => {
   ).length
 
   return {
-    todos,
     filteredTodos,
     filters,
     setFilters,
