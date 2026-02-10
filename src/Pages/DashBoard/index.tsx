@@ -4,7 +4,7 @@ import LogoutIcon from "../../assets/images/logout.png"
 import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
 import FilterPanel from "../../components/dashboard/FilterPanel"
-import { useDashBoard } from "../../hooks/useDashBoard.ts"
+import { useDashBoard } from "../../hooks/useDashBoard"
 
 const Dashboard = () => {
   const { handleLogout } = useAuth()
