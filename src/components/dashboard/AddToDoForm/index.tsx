@@ -1,22 +1,32 @@
 import { useState } from "react"
 import type { Todo } from "../../../types/todo"
 import "./AddToDoForm.scss"
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../../../utils/firebase"
+import { useAuth } from "../../../hooks/useAuth"
 
-type AddToDoFormProps = {
-  onAddTodo: (todo: Todo) => void
-}
 const today = new Date().toISOString().slice(0, 10)
 
-const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
+type Props = {
+  fetchTodos: () => Promise<void>
+}
+
+const AddToDoForm = ({ fetchTodos }: Props) => {
+  const { user } = useAuth()
   const [title, setTitle] = useState("")
   const [dueDate, setDueDate] = useState(today)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
-  const handleAddTodo = (e: React.FormEvent) => {
+  const handleAddTodo = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!title.trim()) {
       alert("タイトルを入力してください。")
+      return
+    }
+
+    if (!user) {
+      alert("ログインしてください。")
       return
     }
 
@@ -28,7 +38,13 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
       completed: false,
     }
 
-    onAddTodo(newTodo)
+    try {
+      await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
+      await fetchTodos()
+    } catch (error) {
+      alert("Todoの追加に失敗しました。")
+      return
+    }
 
     setTitle("")
     setDueDate(today)

@@ -1,9 +1,8 @@
 import { useState, useMemo } from "react"
 import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
-import { doc, setDoc } from "firebase/firestore"
-import { db } from "../utils/firebase"
 import { useAuth } from "./useAuth"
+import { db } from "../utils/firebase"
 import { collection, getDocs } from "firebase/firestore"
 
 export const useDashBoard = () => {
@@ -78,19 +77,6 @@ export const useDashBoard = () => {
     }
   }
 
-  const addTodo = async (newTodo: Todo) => {
-    if (!user) {
-      alert("ログインしてください。")
-      return
-    }
-    try {
-      await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
-      await fetchTodos()
-    } catch (error) {
-      alert("Todoの追加に失敗しました。")
-    }
-  }
-
   const totalCount = todos.length
   const completedCount = todos.filter((todo) => todo.completed).length
   const uncompletedCount = todos.filter(
@@ -110,6 +96,6 @@ export const useDashBoard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
-    addTodo,
+    fetchTodos,
   }
 }

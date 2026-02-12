@@ -19,7 +19,7 @@ const Dashboard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
-    addTodo,
+    fetchTodos,
   } = useDashBoard()
 
   return (
@@ -56,7 +56,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
-            <AddToDoForm onAddTodo={addTodo} />
+            <AddToDoForm fetchTodos={fetchTodos} />
             <div className="todorest">
               <p>{filteredTodos.length}件のタスクを表示中</p>
             </div>
