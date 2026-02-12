@@ -82,9 +82,9 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
               <option value="low">低</option>
             </select>
           </div>
-          <div className="add-todo__form--button">
-            <button onClick={handleAddTodo}>+ 追加</button>
-          </div>
+          <button className="add-todo__form--button" onClick={handleAddTodo}>
+            + 追加
+          </button>
         </div>
       </div>
     </div>
