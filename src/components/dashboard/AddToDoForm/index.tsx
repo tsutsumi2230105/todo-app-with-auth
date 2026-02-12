@@ -5,11 +5,7 @@ import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
 import { format } from "date-fns"
 
-type Props = {
-  fetchTodos: () => Promise<void>
-}
-
-const AddToDoForm = ({ fetchTodos }: Props) => {
+const AddToDoForm = () => {
   const today = format(new Date(), "yyyy-MM-dd")
   const { user } = useAuth()
   const [title, setTitle] = useState("")
@@ -36,7 +32,6 @@ const AddToDoForm = ({ fetchTodos }: Props) => {
         priority,
         completed: false,
       })
-      await fetchTodos()
     } catch (error) {
       alert("Todoの追加に失敗しました。")
       return
