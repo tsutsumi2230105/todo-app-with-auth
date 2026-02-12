@@ -2,11 +2,13 @@ import "./ToDo.scss"
 import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
+import DueDateIcon from "./../../assets/images/due_date.png"
 import type { Todo, UpdateTodoInput } from "../../types/todo"
 import ToDoEdit from "../ToDoEdit"
 import { useAuth } from "../../hooks/useAuth"
 import { db } from "../../utils/firebase"
 import { doc, deleteDoc } from "firebase/firestore"
+import { format } from "date-fns"
 
 type ToDoItemProps = {
   todo: Todo
@@ -104,6 +106,10 @@ const ToDoItem = ({
                     ? "中"
                     : "低"}
               </p>
+            </div>
+            <div className="todo__label--dueDate">
+              <img src={DueDateIcon} alt="期日" />
+              <p>{format(todo.dueDate.toDate(), "yyyy/MM/dd")}</p>
             </div>
           </div>
         </div>
