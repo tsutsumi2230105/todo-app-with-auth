@@ -12,7 +12,9 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
   const [dueDate, setDueDate] = useState(today)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (e: React.FormEvent) => {
+    e.preventDefault()
+
     if (!title.trim()) return
 
     const newTodo: Todo = {
@@ -31,7 +33,7 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
   }
 
   return (
-    <div className="add-todo__form">
+    <form className="add-todo__form" onSubmit={handleAddTodo}>
       <div className="add-todo__header">
         <div className="add-todo__title">
           <h2>新しいTODOを追加</h2>
@@ -82,12 +84,12 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
               <option value="low">低</option>
             </select>
           </div>
-          <button className="add-todo__form--button" onClick={handleAddTodo}>
+          <button type="submit" className="add-todo__form--button">
             + 追加
           </button>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 
