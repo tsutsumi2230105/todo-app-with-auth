@@ -3,6 +3,9 @@ import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 import type { Todo } from "../../types/todo"
+import { useAuth } from "../../hooks/useAuth"
+import { db } from "../../utils/firebase"
+import { doc, deleteDoc } from "firebase/firestore"
 
 type ToDoItemProps = {
   todo: Todo
@@ -10,6 +13,7 @@ type ToDoItemProps = {
 }
 
 const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
+  const { user } = useAuth()
   const checkboxId = useId()
 
   const today = useMemo(() => {
@@ -22,6 +26,17 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   dueDate.setHours(0, 0, 0, 0)
 
   const isExpired = !todo.completed && dueDate < today
+
+  const deleteTodo = async (todoId: string) => {
+    if (!user) return
+    const confirmed = window.confirm("削除してもよろしいですか？")
+    if (!confirmed) return
+    try {
+      await deleteDoc(doc(db, "users", user.uid, "todos", todoId))
+    } catch (error) {
+      alert("削除に失敗しました。")
+    }
+  }
 
   return (
     <div
@@ -83,7 +98,7 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
             </button>
           </div>
           <div className="todo__icon--delete">
-            <button>
+            <button onClick={() => deleteTodo(todo.id)}>
               <img src={DeleteIcon} alt="削除" />
             </button>
           </div>
