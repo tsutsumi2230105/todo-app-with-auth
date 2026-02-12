@@ -149,6 +149,22 @@
       letter-spacing: 0px;
       white-space: nowrap;
     }
+    &--dueDate {
+      border-radius: 8px;
+      padding: 2px 8px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      color: #1e2939;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0px;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+    }
   }
   &--checked {
     background-color: #f9fafb;
