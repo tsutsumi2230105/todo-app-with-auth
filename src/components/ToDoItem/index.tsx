@@ -4,6 +4,7 @@ import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 import DueDateIcon from "./../../assets/images/due_date.png"
 import type { Todo } from "../../types/todo"
+import { format } from "date-fns"
 
 type ToDoItemProps = {
   todo: Todo
@@ -76,7 +77,7 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
             </div>
             <div className="todo__label--dueDate">
               <img src={DueDateIcon} alt="期日" />
-              <p>{todo.dueDate.replace(/-/g, "/")}</p>
+              <p>{format(dueDate, "yyyy/MM/dd")}</p>
             </div>
           </div>
         </div>

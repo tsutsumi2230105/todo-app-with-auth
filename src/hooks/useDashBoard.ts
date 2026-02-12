@@ -8,21 +8,21 @@ const MockTodo: Todo[] = [
     title: "テスト1",
     completed: false,
     priority: "high",
-    dueDate: "2026-02-05",
+    dueDate: new Date("2026-02-05"),
   },
   {
     id: "2",
     title: "テスト2",
     completed: true,
     priority: "middle",
-    dueDate: "2026-02-06",
+    dueDate: new Date("2026-02-06"),
   },
   {
     id: "3",
     title: "テスト3",
     completed: false,
     priority: "low",
-    dueDate: "2026-02-07",
+    dueDate: new Date("2026-02-07"),
   },
 ]
 
@@ -77,7 +77,7 @@ export const useDashBoard = () => {
     return true
   })
 
-  const isExpired = (dueDate: string) => {
+  const isExpired = (dueDate: Date) => {
     const date = new Date(dueDate)
     date.setHours(0, 0, 0, 0)
     return date < today
