@@ -4,6 +4,7 @@ import type { Filters } from "../types/filter"
 import { doc, setDoc } from "firebase/firestore"
 import { db } from "../utils/firebase"
 import { useAuth } from "./useAuth"
+import { collection, getDocs } from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
@@ -63,6 +64,20 @@ export const useDashBoard = () => {
     return date < today
   }
 
+  const fetchTodos = async () => {
+    if (!user) {
+      alert("ログインしてください。")
+      return
+    }
+    try {
+      const snapshot = await getDocs(collection(db, "users", user.uid, "todos"))
+      const todos = snapshot.docs.map((doc) => doc.data() as Todo)
+      setTodos(todos)
+    } catch (error) {
+      alert("Todoの取得に失敗しました。")
+    }
+  }
+
   const addTodo = async (newTodo: Todo) => {
     if (!user) {
       alert("ログインしてください。")
@@ -70,7 +85,7 @@ export const useDashBoard = () => {
     }
     try {
       await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
-      setTodos((prev) => [newTodo, ...prev])
+      await fetchTodos()
     } catch (error) {
       alert("Todoの追加に失敗しました。")
     }
