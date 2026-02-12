@@ -15,7 +15,10 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!title.trim()) return
+    if (!title.trim()) {
+      alert("タイトルを入力してください。")
+      return
+    }
 
     const newTodo: Todo = {
       id: crypto.randomUUID(),
