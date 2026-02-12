@@ -3,14 +3,14 @@ import "./AddToDoForm.scss"
 import { collection, addDoc } from "firebase/firestore"
 import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
-
-const today = new Date().toISOString().slice(0, 10)
+import { format } from "date-fns"
 
 type Props = {
   fetchTodos: () => Promise<void>
 }
 
 const AddToDoForm = ({ fetchTodos }: Props) => {
+  const today = format(new Date(), "yyyy-MM-dd")
   const { user } = useAuth()
   const [title, setTitle] = useState("")
   const [dueDate, setDueDate] = useState(today)
