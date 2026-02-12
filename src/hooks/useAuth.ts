@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { FirebaseError } from "firebase/app"
+import type { User } from "firebase/auth"
 
 type UseAuth = () => {
+  user: User | null
   loading: boolean
   email: string
   setEmail: React.Dispatch<React.SetStateAction<string>>
@@ -21,11 +24,19 @@ type UseAuth = () => {
 }
 
 export const useAuth: UseAuth = () => {
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConf, setPasswordConf] = useState("")
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user)
+    })
+    return unsubscribe
+  }, [])
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -89,6 +100,7 @@ export const useAuth: UseAuth = () => {
   }
 
   return {
+    user,
     loading,
     email,
     setEmail,

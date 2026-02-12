@@ -1,33 +1,13 @@
 import { useState, useMemo } from "react"
 import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
-
-const MockTodo: Todo[] = [
-  {
-    id: "1",
-    title: "テスト1",
-    completed: false,
-    priority: "high",
-    dueDate: "2026-02-05",
-  },
-  {
-    id: "2",
-    title: "テスト2",
-    completed: true,
-    priority: "middle",
-    dueDate: "2026-02-06",
-  },
-  {
-    id: "3",
-    title: "テスト3",
-    completed: false,
-    priority: "low",
-    dueDate: "2026-02-07",
-  },
-]
+import { doc, setDoc } from "firebase/firestore"
+import { db } from "../utils/firebase"
+import { useAuth } from "./useAuth"
 
 export const useDashBoard = () => {
-  const [todos, setTodos] = useState<Todo[]>(MockTodo)
+  const { user } = useAuth()
+  const [todos, setTodos] = useState<Todo[]>([])
   const toggleTodo = (id: string) => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -83,7 +63,9 @@ export const useDashBoard = () => {
     return date < today
   }
 
-  const addTodo = (newTodo: Todo) => {
+  const addTodo = async (newTodo: Todo) => {
+    if (!user) return
+    await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
     setTodos((prev) => [newTodo, ...prev])
   }
 
