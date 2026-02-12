@@ -5,10 +5,11 @@ import "./AddToDoForm.scss"
 type AddToDoFormProps = {
   onAddTodo: (todo: Todo) => void
 }
+const today = new Date().toISOString().slice(0, 10)
 
 const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
   const [title, setTitle] = useState("")
-  const [dueDate, setDueDate] = useState("")
+  const [dueDate, setDueDate] = useState(today)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
   const handleAddTodo = () => {
@@ -25,7 +26,7 @@ const AddToDoForm = ({ onAddTodo }: AddToDoFormProps) => {
     onAddTodo(newTodo)
 
     setTitle("")
-    setDueDate("")
+    setDueDate(today)
     setPriority("middle")
   }
 
