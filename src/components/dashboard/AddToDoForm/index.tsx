@@ -1,7 +1,6 @@
 import { useState } from "react"
-import type { Todo } from "../../../types/todo"
 import "./AddToDoForm.scss"
-import { doc, setDoc } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
 import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
 
@@ -30,16 +29,13 @@ const AddToDoForm = ({ fetchTodos }: Props) => {
       return
     }
 
-    const newTodo: Todo = {
-      id: crypto.randomUUID(),
-      title,
-      dueDate,
-      priority,
-      completed: false,
-    }
-
     try {
-      await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
+      await addDoc(collection(db, "users", user.uid, "todos"), {
+        title,
+        dueDate,
+        priority,
+        completed: false,
+      })
       await fetchTodos()
     } catch (error) {
       alert("Todoの追加に失敗しました。")

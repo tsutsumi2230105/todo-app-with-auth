@@ -70,7 +70,9 @@ export const useDashBoard = () => {
     }
     try {
       const snapshot = await getDocs(collection(db, "users", user.uid, "todos"))
-      const todos = snapshot.docs.map((doc) => doc.data() as Todo)
+      const todos = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() }) as Todo
+      )
       setTodos(todos)
     } catch (error) {
       alert("Todoの取得に失敗しました。")
