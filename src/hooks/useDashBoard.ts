@@ -64,9 +64,16 @@ export const useDashBoard = () => {
   }
 
   const addTodo = async (newTodo: Todo) => {
-    if (!user) return
-    await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
-    setTodos((prev) => [newTodo, ...prev])
+    if (!user) {
+      alert("ログインしてください。")
+      return
+    }
+    try {
+      await setDoc(doc(db, "users", user.uid, "todos", newTodo.id), newTodo)
+      setTodos((prev) => [newTodo, ...prev])
+    } catch (error) {
+      alert("Todoの追加に失敗しました。")
+    }
   }
 
   const totalCount = todos.length
