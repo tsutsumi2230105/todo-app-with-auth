@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./AddToDoForm.scss"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
 import { format } from "date-fns"
@@ -31,6 +31,7 @@ const AddToDoForm = () => {
         dueDate,
         priority,
         completed: false,
+        createdAt: serverTimestamp(),
       })
     } catch (error) {
       alert("Todoの追加に失敗しました。")
