@@ -5,6 +5,7 @@ import "./Dashboard.scss"
 import { useAuth } from "../../hooks/useAuth"
 import FilterPanel from "../../components/dashboard/FilterPanel"
 import { useDashBoard } from "../../hooks/useDashBoard"
+import AddToDoForm from "../../components/dashboard/AddToDoForm"
 
 const Dashboard = () => {
   const { handleLogout } = useAuth()
@@ -54,6 +55,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
+            <AddToDoForm />
             <div className="todorest">
               <p>{filteredTodos.length}件のタスクを表示中</p>
             </div>

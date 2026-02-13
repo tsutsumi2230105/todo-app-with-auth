@@ -1,33 +1,13 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
-
-const MockTodo: Todo[] = [
-  {
-    id: "1",
-    title: "テスト1",
-    completed: false,
-    priority: "high",
-    dueDate: new Date("2026-02-05"),
-  },
-  {
-    id: "2",
-    title: "テスト2",
-    completed: true,
-    priority: "middle",
-    dueDate: new Date("2026-02-06"),
-  },
-  {
-    id: "3",
-    title: "テスト3",
-    completed: false,
-    priority: "low",
-    dueDate: new Date("2026-02-07"),
-  },
-]
+import { useAuth } from "./useAuth"
+import { db } from "../utils/firebase"
+import { collection, onSnapshot } from "firebase/firestore"
 
 export const useDashBoard = () => {
-  const [todos, setTodos] = useState<Todo[]>(MockTodo)
+  const { user } = useAuth()
+  const [todos, setTodos] = useState<Todo[]>([])
   const toggleTodo = (id: string) => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -82,6 +62,21 @@ export const useDashBoard = () => {
     date.setHours(0, 0, 0, 0)
     return date < today
   }
+
+  useEffect(() => {
+    if (!user) return
+    const todosRef = collection(db, "users", user.uid, "todos")
+    const unsubscribe = onSnapshot(todosRef, (snapshot) => {
+      const todosData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Todo[]
+
+      setTodos(todosData)
+    })
+
+    return () => unsubscribe()
+  }, [user])
 
   const totalCount = todos.length
   const completedCount = todos.filter((todo) => todo.completed).length
