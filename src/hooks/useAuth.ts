@@ -25,7 +25,7 @@ type UseAuth = () => {
 
 export const useAuth: UseAuth = () => {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConf, setPasswordConf] = useState("")
@@ -34,6 +34,7 @@ export const useAuth: UseAuth = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
+      setLoading(false)
     })
     return unsubscribe
   }, [])
