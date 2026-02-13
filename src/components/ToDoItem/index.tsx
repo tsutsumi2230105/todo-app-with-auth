@@ -55,7 +55,6 @@ const ToDoItem = ({
       <ToDoEdit editTodo={todo} onClose={onCloseEdit} onUpdate={onUpdate} />
     )
   }
-
   return (
     <div
       className={`todo
