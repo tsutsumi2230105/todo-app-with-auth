@@ -67,9 +67,9 @@ export const useDashBoard = () => {
     if (!user) return
     const todosRef = collection(db, "users", user.uid, "todos")
 
-    const sortedTodo = query(todosRef, orderBy("createdAt", "asc"))
+    const sortQuery = query(todosRef, orderBy("createdAt", "asc"))
 
-    const unsubscribe = onSnapshot(sortedTodo, (snapshot) => {
+    const unsubscribe = onSnapshot(sortQuery, (snapshot) => {
       const todosData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
