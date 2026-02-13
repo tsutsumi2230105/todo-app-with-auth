@@ -8,8 +8,6 @@ import {
   onSnapshot,
   doc,
   updateDoc,
-  query,
-  orderBy,
   Timestamp,
 } from "firebase/firestore"
 
@@ -99,10 +97,7 @@ export const useDashBoard = () => {
   useEffect(() => {
     if (!user) return
     const todosRef = collection(db, "users", user.uid, "todos")
-
-    const sortQuery = query(todosRef, orderBy("createdAt", "desc"))
-
-    const unsubscribe = onSnapshot(sortQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(todosRef, (snapshot) => {
       const todosData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
