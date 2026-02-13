@@ -3,7 +3,7 @@ import SignUp from "./Pages/SignUp"
 import Login from "./Pages/Login"
 import Dashboard from "./Pages/DashBoard"
 import { Toaster } from "react-hot-toast"
-import PrivateRoute from "./components/routing"
+import PrivateRoute from "./components/protectedRoute"
 
 function App() {
   return (
