@@ -3,7 +3,7 @@ import SignUp from "./Pages/SignUp"
 import Login from "./Pages/Login"
 import Dashboard from "./Pages/DashBoard"
 import { Toaster } from "react-hot-toast"
-import PrivateRoute from "./components/protectedRoute"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Dashboard />
-            </PrivateRoute>
+            </ProtectedRoute>
           }
         />
       </Routes>

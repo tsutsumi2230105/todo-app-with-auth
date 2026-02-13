@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const PrivateRoute = ({ children }: Props) => {
+const ProtectedRoute = ({ children }: Props) => {
   const { user, loading } = useAuth()
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const PrivateRoute = ({ children }: Props) => {
   return children
 }
 
-export default PrivateRoute
+export default ProtectedRoute
