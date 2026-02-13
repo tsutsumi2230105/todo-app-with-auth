@@ -57,7 +57,7 @@ export const useDashBoard = () => {
     return true
   })
 
-  const isExpired = (dueDate: string) => {
+  const isExpired = (dueDate: Date) => {
     const date = new Date(dueDate)
     date.setHours(0, 0, 0, 0)
     return date < today

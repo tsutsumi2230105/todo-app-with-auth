@@ -2,7 +2,9 @@ import "./ToDo.scss"
 import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
+import DueDateIcon from "./../../assets/images/due_date.png"
 import type { Todo } from "../../types/todo"
+import { format } from "date-fns"
 
 type ToDoItemProps = {
   todo: Todo
@@ -72,6 +74,10 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
                     ? "中"
                     : "低"}
               </p>
+            </div>
+            <div className="todo__label--dueDate">
+              <img src={DueDateIcon} alt="期日" />
+              <p>{format(dueDate, "yyyy/MM/dd")}</p>
             </div>
           </div>
         </div>
