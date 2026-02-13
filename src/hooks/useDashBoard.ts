@@ -3,7 +3,7 @@ import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
 import { useAuth } from "./useAuth"
 import { db } from "../utils/firebase"
-import { collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore"
+import { collection, onSnapshot } from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
@@ -57,17 +57,6 @@ export const useDashBoard = () => {
     return true
   })
 
-  const deleteTodo = async (todoId: string) => {
-    if (!user) return
-    const confirmed = window.confirm("削除してもよろしいですか？")
-    if (!confirmed) return
-    try {
-      await deleteDoc(doc(db, "users", user.uid, "todos", todoId))
-    } catch {
-      alert("削除に失敗しました。")
-    }
-  }
-
   const isExpired = (dueDate: string) => {
     const date = new Date(dueDate)
     date.setHours(0, 0, 0, 0)
@@ -111,6 +100,5 @@ export const useDashBoard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
-    deleteTodo,
   }
 }
