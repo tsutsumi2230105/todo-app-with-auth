@@ -3,7 +3,7 @@ import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
 import { useAuth } from "./useAuth"
 import { db } from "../utils/firebase"
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
