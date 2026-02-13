@@ -6,10 +6,11 @@ import { db } from "../utils/firebase"
 import {
   collection,
   onSnapshot,
-  query,
-  orderBy,
   doc,
   updateDoc,
+  query,
+  orderBy,
+  Timestamp,
 } from "firebase/firestore"
 
 export const useDashBoard = () => {
@@ -50,7 +51,7 @@ export const useDashBoard = () => {
     if (filters.priority !== "all" && todo.priority !== filters.priority)
       return false
     if (filters.limit !== "all") {
-      const dueDate = new Date(todo.dueDate)
+      const dueDate = todo.dueDate.toDate()
       dueDate.setHours(0, 0, 0, 0)
 
       if (filters.limit === "expired") {
@@ -70,8 +71,8 @@ export const useDashBoard = () => {
     return true
   })
 
-  const isExpired = (dueDate: Date) => {
-    const date = new Date(dueDate)
+  const isExpired = (dueDate: Timestamp) => {
+    const date = dueDate.toDate()
     date.setHours(0, 0, 0, 0)
     return date < today
   }
@@ -82,13 +83,17 @@ export const useDashBoard = () => {
   ): Promise<void> => {
     if (!user) return
 
-    const todoRef = doc(db, "users", user.uid, "todos", id)
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
 
-    await updateDoc(todoRef, {
-      title: data.title,
-      dueDate: data.dueDate,
-      priority: data.priority,
-    })
+      await updateDoc(todoRef, {
+        title: data.title,
+        dueDate: Timestamp.fromDate(data.dueDate),
+        priority: data.priority,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
   }
 
   useEffect(() => {

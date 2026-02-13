@@ -2,8 +2,6 @@ import "./ToDo.scss"
 import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
-import DueDateIcon from "./../../assets/images/due_date.png"
-import { format } from "date-fns"
 import type { Todo, UpdateTodoInput } from "../../types/todo"
 import ToDoEdit from "../ToDoEdit"
 import { useAuth } from "../../hooks/useAuth"
@@ -36,7 +34,7 @@ const ToDoItem = ({
     return date
   }, [])
 
-  const dueDate = new Date(todo.dueDate)
+  const dueDate = todo.dueDate.toDate()
   dueDate.setHours(0, 0, 0, 0)
 
   const isExpired = !todo.completed && dueDate < today
@@ -51,6 +49,7 @@ const ToDoItem = ({
       alert("削除に失敗しました。")
     }
   }
+
   if (isEditing) {
     return (
       <ToDoEdit editTodo={todo} onClose={onCloseEdit} onUpdate={onUpdate} />
@@ -106,10 +105,6 @@ const ToDoItem = ({
                     ? "中"
                     : "低"}
               </p>
-            </div>
-            <div className="todo__label--dueDate">
-              <img src={DueDateIcon} alt="期日" />
-              <p>{format(dueDate, "yyyy/MM/dd")}</p>
             </div>
           </div>
         </div>
