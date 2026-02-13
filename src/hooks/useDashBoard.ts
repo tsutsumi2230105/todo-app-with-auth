@@ -3,7 +3,7 @@ import type { Todo } from "../types/todo"
 import type { Filters } from "../types/filter"
 import { useAuth } from "./useAuth"
 import { db } from "../utils/firebase"
-import { collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore"
+import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
@@ -77,10 +77,7 @@ export const useDashBoard = () => {
   useEffect(() => {
     if (!user) return
     const todosRef = collection(db, "users", user.uid, "todos")
-
-    const sortQuery = query(todosRef, orderBy("createdAt", "desc"))
-
-    const unsubscribe = onSnapshot(sortQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(todosRef, (snapshot) => {
       const todosData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
