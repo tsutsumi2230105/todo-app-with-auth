@@ -8,15 +8,20 @@ type Props = {
 }
 
 const PrivateRoute = ({ children }: Props) => {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
 
   useEffect(() => {
+    if (loading) return
     if (!user) {
       toast.error("ログインしてください", {
         id: "auth-error",
       })
     }
-  }, [user])
+  }, [user, loading])
+
+  if (loading) {
+    return null
+  }
 
   if (!user) {
     return <Navigate to="/login" replace />
