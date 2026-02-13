@@ -33,7 +33,7 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
     if (!confirmed) return
     try {
       await deleteDoc(doc(db, "users", user.uid, "todos", todoId))
-    } catch (error) {
+    } catch {
       alert("削除に失敗しました。")
     }
   }
