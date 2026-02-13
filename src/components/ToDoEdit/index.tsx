@@ -1,19 +1,28 @@
 import { useState } from "react"
 import "./ToDoEdit.scss"
-import type { Todo } from "../../types/todo"
+import type { Todo, UpdateTodoInput } from "../../types/todo"
 
 type ToDoEditProps = {
   editTodo: Todo | null
   onClose: () => void
+  onUpdate: (id: string, data: UpdateTodoInput) => Promise<void>
 }
 
-const ToDoEdit = ({ editTodo, onClose }: ToDoEditProps) => {
+const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   if (!editTodo) return null
   const [title, setTitle] = useState(editTodo.title)
   const [dueDate, setDueDate] = useState(editTodo.dueDate)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!editTodo) return
+
+    await onUpdate(editTodo.id, {
+      title,
+      dueDate,
+      priority,
+    })
+
     onClose()
   }
 

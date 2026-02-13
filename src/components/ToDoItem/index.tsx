@@ -3,8 +3,8 @@ import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
 import DueDateIcon from "./../../assets/images/due_date.png"
-import type { Todo } from "../../types/todo"
 import { format } from "date-fns"
+import type { Todo, UpdateTodoInput } from "../../types/todo"
 import ToDoEdit from "../ToDoEdit"
 
 type ToDoItemProps = {
@@ -13,6 +13,7 @@ type ToDoItemProps = {
   isEditing: boolean
   onEdit: () => void
   onCloseEdit: () => void
+  onUpdate: (id: string, data: UpdateTodoInput) => Promise<void>
 }
 
 const ToDoItem = ({
@@ -21,6 +22,7 @@ const ToDoItem = ({
   isEditing,
   onEdit,
   onCloseEdit,
+  onUpdate,
 }: ToDoItemProps) => {
   const checkboxId = useId()
 
@@ -36,7 +38,9 @@ const ToDoItem = ({
   const isExpired = !todo.completed && dueDate < today
 
   if (isEditing) {
-    return <ToDoEdit editTodo={todo} onClose={onCloseEdit} />
+    return (
+      <ToDoEdit editTodo={todo} onClose={onCloseEdit} onUpdate={onUpdate} />
+    )
   }
 
   return (

@@ -22,6 +22,7 @@ const Dashboard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
+    updateTodo,
   } = useDashBoard()
 
   return (
@@ -71,6 +72,7 @@ const Dashboard = () => {
                   isEditing={editTodo?.id === todo.id}
                   onEdit={() => setEditTodo(todo)}
                   onCloseEdit={() => setEditTodo(null)}
+                  onUpdate={updateTodo}
                 />
               ))}
             </div>

@@ -8,3 +8,9 @@ export type Todo = {
   dueDate: Date
   createdAt: Timestamp
 }
+
+export type UpdateTodoInput = {
+  title: string
+  dueDate: string
+  priority: "high" | "middle" | "low"
+}
