@@ -5,13 +5,23 @@ import DeleteIcon from "./../../assets/images/delete.png"
 import DueDateIcon from "./../../assets/images/due_date.png"
 import type { Todo } from "../../types/todo"
 import { format } from "date-fns"
+import ToDoEdit from "../ToDoEdit"
 
 type ToDoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
+  isEditing: boolean
+  onEdit: () => void
+  onCloseEdit: () => void
 }
 
-const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
+const ToDoItem = ({
+  todo,
+  onToggle,
+  isEditing,
+  onEdit,
+  onCloseEdit,
+}: ToDoItemProps) => {
   const checkboxId = useId()
 
   const today = useMemo(() => {
@@ -24,6 +34,10 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
   dueDate.setHours(0, 0, 0, 0)
 
   const isExpired = !todo.completed && dueDate < today
+
+  if (isEditing) {
+    return <ToDoEdit editTodo={todo} onClose={onCloseEdit} />
+  }
 
   return (
     <div
@@ -84,7 +98,7 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
 
         <div className="todo__icons">
           <div className="todo__icon--edit">
-            <button>
+            <button onClick={onEdit}>
               <img src={EditIcon} alt="編集" />
             </button>
           </div>

@@ -7,3 +7,4 @@ export type Todo = {
   priority: "high" | "middle" | "low"
   dueDate: Date
   createdAt: Timestamp
+}

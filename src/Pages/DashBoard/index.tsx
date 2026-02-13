@@ -6,9 +6,11 @@ import { useAuth } from "../../hooks/useAuth"
 import FilterPanel from "../../components/dashboard/FilterPanel"
 import { useDashBoard } from "../../hooks/useDashBoard"
 import AddToDoForm from "../../components/dashboard/AddToDoForm"
-import ToDoEdit from "../../components/ToDoEdit"
+import { useState } from "react"
+import type { Todo } from "../../types/todo"
 
 const Dashboard = () => {
+  const [editTodo, setEditTodo] = useState<Todo | null>(null)
   const { handleLogout } = useAuth()
   const {
     filteredTodos,
@@ -56,14 +58,20 @@ const Dashboard = () => {
         </div>
         <div className="dashboard__view-todo">
           <div className="dashboard__todo">
-            <ToDoEdit />
             <AddToDoForm />
             <div className="todorest">
               <p>{filteredTodos.length}件のタスクを表示中</p>
             </div>
             <div className="todo__items">
               {filteredTodos.map((todo) => (
-                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+                <ToDoItem
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={toggleTodo}
+                  isEditing={editTodo?.id === todo.id}
+                  onEdit={() => setEditTodo(todo)}
+                  onCloseEdit={() => setEditTodo(null)}
+                />
               ))}
             </div>
             {filteredTodos.length === 0 && (

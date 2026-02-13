@@ -1,10 +1,21 @@
 import { useState } from "react"
 import "./ToDoEdit.scss"
+import type { Todo } from "../../types/todo"
 
-const ToDoEdit = () => {
-  const [title, setTitle] = useState("")
-  const [dueDate, setDueDate] = useState("")
+type ToDoEditProps = {
+  editTodo: Todo | null
+  onClose: () => void
+}
+
+const ToDoEdit = ({ editTodo, onClose }: ToDoEditProps) => {
+  if (!editTodo) return null
+  const [title, setTitle] = useState(editTodo.title)
+  const [dueDate, setDueDate] = useState(editTodo.dueDate)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
+
+  const handleSave = () => {
+    onClose()
+  }
 
   return (
     <div className="edit-todo__form">
@@ -50,13 +61,17 @@ const ToDoEdit = () => {
             </select>
           </div>
           <div className="edit-todo__actions">
-            <button className="edit-todo__button edit-todo__button--save">
+            <button
+              className="edit-todo__button edit-todo__button--save"
+              onClick={handleSave}
+            >
               保存
             </button>
 
             <button
               className="edit-todo__button edit-todo__button--cancel"
               type="button"
+              onClick={onClose}
             >
               キャンセル
             </button>
