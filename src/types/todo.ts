@@ -5,3 +5,9 @@ export type Todo = {
   priority: "high" | "middle" | "low"
   dueDate: string
 }
+
+export type UpdateTodoInput = {
+  title: string
+  dueDate: string
+  priority: "high" | "middle" | "low"
+}

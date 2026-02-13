@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from "react"
-import type { Todo } from "../types/todo"
+import type { Todo, UpdateTodoInput } from "../types/todo"
 import type { Filters } from "../types/filter"
 import { useAuth } from "./useAuth"
 import { db } from "../utils/firebase"
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
@@ -63,6 +63,21 @@ export const useDashBoard = () => {
     return date < today
   }
 
+  const updateTodo = async (
+    id: string,
+    data: UpdateTodoInput
+  ): Promise<void> => {
+    if (!user) return
+
+    const todoRef = doc(db, "users", user.uid, "todos", id)
+
+    await updateDoc(todoRef, {
+      title: data.title,
+      dueDate: data.dueDate,
+      priority: data.priority,
+    })
+  }
+
   useEffect(() => {
     if (!user) return
     const todosRef = collection(db, "users", user.uid, "todos")
@@ -97,5 +112,6 @@ export const useDashBoard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
+    updateTodo,
   }
 }
