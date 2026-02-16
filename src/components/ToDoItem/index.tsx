@@ -36,10 +36,12 @@ const ToDoItem = ({
     return date
   }, [])
 
-  const dueDate = todo.dueDate.toDate()
-  dueDate.setHours(0, 0, 0, 0)
+  const dueDate = todo.dueDate ? todo.dueDate.toDate() : null
+  if (dueDate) {
+    dueDate.setHours(0, 0, 0, 0)
+  }
 
-  const isExpired = !todo.completed && dueDate < today
+  const isExpired = !todo.completed && dueDate ? dueDate < today : false
 
   const deleteTodo = async (todoId: string) => {
     if (!user) return
@@ -109,7 +111,12 @@ const ToDoItem = ({
             </div>
             <div className="todo__label--dueDate">
               <img src={DueDateIcon} alt="期日" />
-              <p>{format(todo.dueDate.toDate(), "yyyy/MM/dd")}</p>
+              <p>
+                {" "}
+                {todo.dueDate
+                  ? format(todo.dueDate.toDate(), "yyyy/MM/dd")
+                  : "期限なし"}
+              </p>
             </div>
           </div>
         </div>

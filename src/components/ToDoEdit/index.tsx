@@ -11,7 +11,9 @@ type ToDoEditProps = {
 const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   if (!editTodo) return null
   const [title, setTitle] = useState(editTodo.title)
-  const [dueDate, setDueDate] = useState<Date>(editTodo.dueDate.toDate())
+  const [dueDate, setDueDate] = useState<Date | null>(
+    editTodo.dueDate ? editTodo.dueDate.toDate() : null
+  )
   const [priority, setPriority] = useState<"high" | "middle" | "low">(
     editTodo.priority
   )
@@ -55,8 +57,14 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
               id="edit-todo__form--limit"
               type="date"
               className="input__form"
-              value={format(dueDate, "yyyy-MM-dd")}
-              onChange={(e) => setDueDate(new Date(e.target.value))}
+              value={dueDate ? format(dueDate, "yyyy-MM-dd") : ""}
+              onChange={(e) => {
+                if (!e.target.value) {
+                  setDueDate(null)
+                } else {
+                  setDueDate(new Date(e.target.value))
+                }
+              }}
             />
           </div>
         </div>
