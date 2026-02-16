@@ -17,13 +17,16 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   const handleSave = async () => {
     if (!editTodo) return
 
-    await onUpdate(editTodo.id, {
-      title,
-      dueDate,
-      priority,
-    })
-
-    onClose()
+    try {
+      await onUpdate(editTodo.id, {
+        title,
+        dueDate,
+        priority,
+      })
+      onClose()
+    } catch (error) {
+      alert("ToDoの更新に失敗しました。")
+    }
   }
 
   return (
