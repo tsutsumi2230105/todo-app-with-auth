@@ -4,12 +4,13 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
 import { format } from "date-fns"
+import { Timestamp } from "firebase/firestore"
 
 const AddToDoForm = () => {
-  const today = format(new Date(), "yyyy-MM-dd")
+  const today = new Date()
   const { user } = useAuth()
   const [title, setTitle] = useState("")
-  const [dueDate, setDueDate] = useState(today)
+  const [dueDate, setDueDate] = useState<Date>(today)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
   const handleAddTodo = async (e: React.FormEvent) => {
@@ -28,7 +29,7 @@ const AddToDoForm = () => {
     try {
       await addDoc(collection(db, "users", user.uid, "todos"), {
         title,
-        dueDate,
+        dueDate: Timestamp.fromDate(dueDate),
         priority,
         completed: false,
         createdAt: serverTimestamp(),
@@ -73,8 +74,8 @@ const AddToDoForm = () => {
               id="add-todo__form--limit"
               type="date"
               className="input__form"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+              value={format(dueDate, "yyyy-MM-dd")}
+              onChange={(e) => setDueDate(new Date(e.target.value))}
             />
           </div>
         </div>
