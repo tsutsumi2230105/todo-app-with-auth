@@ -15,12 +15,18 @@ import {
 export const useDashBoard = () => {
   const { user } = useAuth()
   const [todos, setTodos] = useState<Todo[]>([])
-  const toggleTodo = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    )
+  const toggleTodo = async (id: string) => {
+    if (!user) return
+    const target = todos.find((t) => t.id === id)
+    if (!target) return
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
+      await updateDoc(todoRef, {
+        completed: !target.completed,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
   }
   const [filters, setFilters] = useState<Filters>({
     status: "all",
