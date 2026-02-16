@@ -18,7 +18,10 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
 
   const handleSave = async () => {
     if (!editTodo) return
-
+    if (!title.trim()) {
+      alert("タイトルを入力してください。")
+      return
+    }
     try {
       await onUpdate(editTodo.id, {
         title,
