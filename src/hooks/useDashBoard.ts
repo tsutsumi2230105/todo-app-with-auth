@@ -1,19 +1,32 @@
 import { useState, useMemo, useEffect } from "react"
-import type { Todo } from "../types/todo"
+import type { Todo, UpdateTodoInput } from "../types/todo"
 import type { Filters } from "../types/filter"
 import { useAuth } from "./useAuth"
 import { db } from "../utils/firebase"
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore"
+import {
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc,
+  query,
+  orderBy,
+} from "firebase/firestore"
 
 export const useDashBoard = () => {
   const { user } = useAuth()
   const [todos, setTodos] = useState<Todo[]>([])
-  const toggleTodo = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    )
+  const toggleTodo = async (id: string) => {
+    if (!user) return
+    const target = todos.find((t) => t.id === id)
+    if (!target) return
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
+      await updateDoc(todoRef, {
+        completed: !target.completed,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
   }
   const [filters, setFilters] = useState<Filters>({
     status: "all",
@@ -63,6 +76,25 @@ export const useDashBoard = () => {
     return date < today
   }
 
+  const updateTodo = async (
+    id: string,
+    data: UpdateTodoInput
+  ): Promise<void> => {
+    if (!user) return
+
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
+
+      await updateDoc(todoRef, {
+        title: data.title,
+        dueDate: data.dueDate,
+        priority: data.priority,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
+  }
+
   useEffect(() => {
     if (!user) return
     const todosRef = collection(db, "users", user.uid, "todos")
@@ -100,5 +132,6 @@ export const useDashBoard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
+    updateTodo,
   }
 }

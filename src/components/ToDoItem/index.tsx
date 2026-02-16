@@ -2,7 +2,8 @@ import "./ToDo.scss"
 import { useId, useMemo } from "react"
 import EditIcon from "./../../assets/images/edit.png"
 import DeleteIcon from "./../../assets/images/delete.png"
-import type { Todo } from "../../types/todo"
+import type { Todo, UpdateTodoInput } from "../../types/todo"
+import ToDoEdit from "../ToDoEdit"
 import { useAuth } from "../../hooks/useAuth"
 import { db } from "../../utils/firebase"
 import { doc, deleteDoc } from "firebase/firestore"
@@ -10,9 +11,20 @@ import { doc, deleteDoc } from "firebase/firestore"
 type ToDoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
+  isEditing: boolean
+  onEdit: () => void
+  onCloseEdit: () => void
+  onUpdate: (id: string, data: UpdateTodoInput) => Promise<void>
 }
 
-const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
+const ToDoItem = ({
+  todo,
+  onToggle,
+  isEditing,
+  onEdit,
+  onCloseEdit,
+  onUpdate,
+}: ToDoItemProps) => {
   const { user } = useAuth()
   const checkboxId = useId()
 
@@ -36,6 +48,12 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
     } catch {
       alert("削除に失敗しました。")
     }
+  }
+  
+  if (isEditing) {
+    return (
+    　<ToDoEdit editTodo={todo} onClose={onCloseEdit} onUpdate={onUpdate} />
+  　)
   }
 
   return (
@@ -93,7 +111,7 @@ const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
 
         <div className="todo__icons">
           <div className="todo__icon--edit">
-            <button>
+            <button onClick={onEdit}>
               <img src={EditIcon} alt="編集" />
             </button>
           </div>

@@ -6,8 +6,11 @@ import { useAuth } from "../../hooks/useAuth"
 import FilterPanel from "../../components/dashboard/FilterPanel"
 import { useDashBoard } from "../../hooks/useDashBoard"
 import AddToDoForm from "../../components/dashboard/AddToDoForm"
+import { useState } from "react"
+import type { Todo } from "../../types/todo"
 
 const Dashboard = () => {
+  const [editTodo, setEditTodo] = useState<Todo | null>(null)
   const { handleLogout } = useAuth()
   const {
     filteredTodos,
@@ -19,6 +22,7 @@ const Dashboard = () => {
     uncompletedCount,
     expiredCount,
     toggleTodo,
+    updateTodo,
   } = useDashBoard()
 
   return (
@@ -61,7 +65,15 @@ const Dashboard = () => {
             </div>
             <div className="todo__items">
               {filteredTodos.map((todo) => (
-                <ToDoItem key={todo.id} todo={todo} onToggle={toggleTodo} />
+                <ToDoItem
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={toggleTodo}
+                  isEditing={editTodo?.id === todo.id}
+                  onEdit={() => setEditTodo(todo)}
+                  onCloseEdit={() => setEditTodo(null)}
+                  onUpdate={updateTodo}
+                />
               ))}
             </div>
             {filteredTodos.length === 0 && (
