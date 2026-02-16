@@ -8,11 +8,17 @@ import {
   onSnapshot,
   doc,
   updateDoc,
+<<<<<<< HEAD
   Timestamp,
   query,
   orderBy,
 } from "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
+=======
+  query,
+  orderBy,
+} from "firebase/firestore"
+>>>>>>> origin/main
 
 export const useDashBoard = () => {
   const { user } = useAuth()
@@ -89,7 +95,11 @@ export const useDashBoard = () => {
 
       await updateDoc(todoRef, {
         title: data.title,
+<<<<<<< HEAD
         dueDate: Timestamp.fromDate(data.dueDate),
+=======
+        dueDate: data.dueDate,
+>>>>>>> origin/main
         priority: data.priority,
       })
     } catch (error) {
