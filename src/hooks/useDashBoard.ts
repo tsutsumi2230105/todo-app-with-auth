@@ -8,6 +8,7 @@ import {
   onSnapshot,
   doc,
   updateDoc,
+  Timestamp,
   query,
   orderBy,
 } from "firebase/firestore"
@@ -50,7 +51,7 @@ export const useDashBoard = () => {
     if (filters.priority !== "all" && todo.priority !== filters.priority)
       return false
     if (filters.limit !== "all") {
-      const dueDate = new Date(todo.dueDate)
+      const dueDate = todo.dueDate.toDate()
       dueDate.setHours(0, 0, 0, 0)
 
       if (filters.limit === "expired") {
@@ -70,8 +71,8 @@ export const useDashBoard = () => {
     return true
   })
 
-  const isExpired = (dueDate: string) => {
-    const date = new Date(dueDate)
+  const isExpired = (dueDate: Timestamp) => {
+    const date = dueDate.toDate()
     date.setHours(0, 0, 0, 0)
     return date < today
   }
@@ -87,7 +88,7 @@ export const useDashBoard = () => {
 
       await updateDoc(todoRef, {
         title: data.title,
-        dueDate: data.dueDate,
+        dueDate: Timestamp.fromDate(data.dueDate),
         priority: data.priority,
       })
     } catch (error) {
