@@ -12,7 +12,9 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   if (!editTodo) return null
   const [title, setTitle] = useState(editTodo.title)
   const [dueDate, setDueDate] = useState(editTodo.dueDate)
-  const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
+  const [priority, setPriority] = useState<"high" | "middle" | "low">(
+    editTodo.priority
+  )
 
   const handleSave = async () => {
     if (!editTodo) return
