@@ -82,13 +82,17 @@ export const useDashBoard = () => {
   ): Promise<void> => {
     if (!user) return
 
-    const todoRef = doc(db, "users", user.uid, "todos", id)
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
 
-    await updateDoc(todoRef, {
-      title: data.title,
-      dueDate: data.dueDate,
-      priority: data.priority,
-    })
+      await updateDoc(todoRef, {
+        title: data.title,
+        dueDate: data.dueDate,
+        priority: data.priority,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
   }
 
   useEffect(() => {
