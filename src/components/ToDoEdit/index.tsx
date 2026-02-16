@@ -1,7 +1,7 @@
 import { useState } from "react"
 import "./ToDoEdit.scss"
 import type { Todo, UpdateTodoInput } from "../../types/todo"
-
+import { format } from "date-fns"
 type ToDoEditProps = {
   editTodo: Todo | null
   onClose: () => void
@@ -11,7 +11,7 @@ type ToDoEditProps = {
 const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   if (!editTodo) return null
   const [title, setTitle] = useState(editTodo.title)
-  const [dueDate, setDueDate] = useState(editTodo.dueDate)
+  const [dueDate, setDueDate] = useState<Date>(editTodo.dueDate.toDate())
   const [priority, setPriority] = useState<"high" | "middle" | "low">(
     editTodo.priority
   )
@@ -55,8 +55,8 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
               id="edit-todo__form--limit"
               type="date"
               className="input__form"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+              value={format(dueDate, "yyyy-MM-dd")}
+              onChange={(e) => setDueDate(new Date(e.target.value))}
             />
           </div>
         </div>
