@@ -11,7 +11,6 @@ const AddToDoForm = () => {
   const { user } = useAuth()
   const [title, setTitle] = useState("")
   const [dueDate, setDueDate] = useState<Date | null>(today)
-
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
   const handleAddTodo = async (e: React.FormEvent) => {
@@ -19,11 +18,6 @@ const AddToDoForm = () => {
 
     if (!title.trim()) {
       alert("タイトルを入力してください。")
-      return
-    }
-
-    if (!dueDate) {
-      alert("期限を入力してください。")
       return
     }
 
@@ -35,7 +29,7 @@ const AddToDoForm = () => {
     try {
       await addDoc(collection(db, "users", user.uid, "todos"), {
         title,
-        dueDate: Timestamp.fromDate(dueDate),
+        dueDate: dueDate ? Timestamp.fromDate(dueDate) : null,
         priority,
         completed: false,
         createdAt: serverTimestamp(),
