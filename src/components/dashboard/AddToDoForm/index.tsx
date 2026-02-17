@@ -5,6 +5,7 @@ import { db } from "../../../utils/firebase"
 import { useAuth } from "../../../hooks/useAuth"
 import { format } from "date-fns"
 import { Timestamp } from "firebase/firestore"
+import dropdown from "../../../assets/images/dropdown.png"
 
 const AddToDoForm = () => {
   const today = new Date()
@@ -90,6 +91,7 @@ const AddToDoForm = () => {
           <div className="add-todo__form--field">
             <label htmlFor="add-todo__form--priority">優先度</label>
             <select
+              style={{ backgroundImage: `url(${dropdown})` }}
               id="add-todo__form--priority"
               className="input__form"
               value={priority}

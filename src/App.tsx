@@ -3,7 +3,7 @@ import SignUp from "./Pages/SignUp"
 import Login from "./Pages/Login"
 import Dashboard from "./Pages/DashBoard"
 import { Toaster } from "react-hot-toast"
-import ProtectedRoute from "./components/ProtectedRoute"
+import ProtectedRoute from "./components/protectedRoute"
 import { useAuth } from "./hooks/useAuth"
 
 function App() {

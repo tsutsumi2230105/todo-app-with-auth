@@ -7,6 +7,7 @@ type ToDoEditProps = {
   onClose: () => void
   onUpdate: (id: string, data: UpdateTodoInput) => Promise<void>
 }
+import dropdown from "../../assets/images/dropdown.png"
 
 const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
   if (!editTodo) return null
@@ -73,6 +74,7 @@ const ToDoEdit = ({ editTodo, onClose, onUpdate }: ToDoEditProps) => {
           <div className="edit-todo__form--field">
             <label htmlFor="edit-todo__form--priority">優先度</label>
             <select
+              style={{ backgroundImage: `url(${dropdown})` }}
               id="edit-todo__form--priority"
               className="input__form"
               value={priority}
