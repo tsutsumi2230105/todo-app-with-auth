@@ -1,6 +1,7 @@
 import Filter from "../../../assets/images/filter.png"
 import "./FilterPanel.scss"
 import type { Filters } from "../../../types/filter"
+import dropdown from "../../../assets/images/dropdown.png"
 
 type Props = {
   filters: Filters
@@ -26,6 +27,7 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             ステータス
           </label>
           <select
+            style={{ backgroundImage: `url(${dropdown})` }}
             id="status"
             className="dashboard-filter__select"
             value={filters.status}
@@ -46,6 +48,7 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             優先度
           </label>
           <select
+            style={{ backgroundImage: `url(${dropdown})` }}
             id="priority"
             className="dashboard-filter__select"
             value={filters.priority}
@@ -67,6 +70,7 @@ const FilterPanel = ({ filters, activeFilterCount, setFilters }: Props) => {
             期限
           </label>
           <select
+            style={{ backgroundImage: `url(${dropdown})` }}
             id="limit"
             className="dashboard-filter__select"
             value={filters.limit}
