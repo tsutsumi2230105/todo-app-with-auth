@@ -10,7 +10,7 @@ const AddToDoForm = () => {
   const today = new Date()
   const { user } = useAuth()
   const [title, setTitle] = useState("")
-  const [dueDate, setDueDate] = useState<Date>(today)
+  const [dueDate, setDueDate] = useState<Date | null>(today)
   const [priority, setPriority] = useState<"high" | "middle" | "low">("middle")
 
   const handleAddTodo = async (e: React.FormEvent) => {
@@ -29,7 +29,7 @@ const AddToDoForm = () => {
     try {
       await addDoc(collection(db, "users", user.uid, "todos"), {
         title,
-        dueDate: Timestamp.fromDate(dueDate),
+        dueDate: dueDate ? Timestamp.fromDate(dueDate) : null,
         priority,
         completed: false,
         createdAt: serverTimestamp(),
@@ -74,8 +74,14 @@ const AddToDoForm = () => {
               id="add-todo__form--limit"
               type="date"
               className="input__form"
-              value={format(dueDate, "yyyy-MM-dd")}
-              onChange={(e) => setDueDate(new Date(e.target.value))}
+              value={dueDate ? format(dueDate, "yyyy-MM-dd") : ""}
+              onChange={(e) => {
+                if (!e.target.value) {
+                  setDueDate(null)
+                } else {
+                  setDueDate(new Date(e.target.value))
+                }
+              }}
             />
           </div>
         </div>

@@ -5,12 +5,12 @@ export type Todo = {
   title: string
   completed: boolean
   priority: "high" | "middle" | "low"
-  dueDate: Timestamp
+  dueDate: Timestamp | null
   createdAt: Timestamp
 }
 
 export type UpdateTodoInput = {
   title: string
-  dueDate: Date
+  dueDate: Date | null
   priority: "high" | "middle" | "low"
 }

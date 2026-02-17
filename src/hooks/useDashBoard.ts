@@ -51,6 +51,7 @@ export const useDashBoard = () => {
     if (filters.priority !== "all" && todo.priority !== filters.priority)
       return false
     if (filters.limit !== "all") {
+      if (!todo.dueDate) return true
       const dueDate = todo.dueDate.toDate()
       dueDate.setHours(0, 0, 0, 0)
 
@@ -71,7 +72,8 @@ export const useDashBoard = () => {
     return true
   })
 
-  const isExpired = (dueDate: Timestamp) => {
+  const isExpired = (dueDate: Timestamp | null) => {
+    if (!dueDate) return false
     const date = dueDate.toDate()
     date.setHours(0, 0, 0, 0)
     return date < today
@@ -88,7 +90,7 @@ export const useDashBoard = () => {
 
       await updateDoc(todoRef, {
         title: data.title,
-        dueDate: Timestamp.fromDate(data.dueDate),
+        dueDate: data.dueDate ? Timestamp.fromDate(data.dueDate) : null,
         priority: data.priority,
       })
     } catch (error) {
