@@ -112,7 +112,6 @@ const ToDoItem = ({
             <div className="todo__label--dueDate">
               <img src={DueDateIcon} alt="期日" />
               <p>
-                {" "}
                 {todo.dueDate
                   ? format(todo.dueDate.toDate(), "yyyy/MM/dd")
                   : "期限なし"}
