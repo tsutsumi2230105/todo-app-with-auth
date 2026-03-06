@@ -7,8 +7,8 @@
 
   &__content {
     display: flex;
-    flex-direction: row;
     gap: 16px;
+    align-items: flex-start;
   }
 
   &__check {
@@ -17,6 +17,7 @@
 
   &__checkbox {
     margin-top: 4px;
+    flex-shrink: 0;
   }
 
   &__checkbox-box {
@@ -46,12 +47,15 @@
   }
 
   &__main {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
   &__title {
+    min-width: 0;
     font-weight: 400;
     font-size: 18px;
     line-height: 28px;
@@ -59,12 +63,17 @@
 
     p {
       margin: 0;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
+
     &-label {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
+      min-width: 0;
+      flex-wrap: wrap;
     }
   }
 
@@ -76,6 +85,7 @@
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0;
+    flex-wrap: wrap;
   }
 
   &__icons {
@@ -85,6 +95,8 @@
     gap: 8px;
     width: 72px;
     height: 32px;
+    flex-shrink: 0;
+    align-self: flex-start;
   }
 
   &__icon {
@@ -132,21 +144,26 @@
       border: 1px solid #ffc9c9;
       color: #9f0712;
     }
+
     &--middle {
       background: #fef9c2;
       border: 1px solid #fff085;
       color: #894b00;
     }
+
     &--low {
       background: #dcfce7;
       border: 1px solid #b9f8cf;
       color: #016630;
     }
+
     &--expired {
       background: #ffe2e2;
       border: 1px solid #ffc9c9;
       color: #9f0712;
+      flex-shrink: 0;
     }
+
     &--dueDate {
       background: #f3f4f6;
       border: 1px solid #e5e7eb;
@@ -157,8 +174,10 @@
       align-items: center;
     }
   }
+
   &--checked {
     background-color: #f9fafb;
+
     .todo__title p {
       text-decoration: line-through;
       color: #6a7282;
@@ -172,6 +191,7 @@
       display: block;
     }
   }
+
   &--expired {
     border: 1px solid #ff6467;
     background-color: #fef2f2;
