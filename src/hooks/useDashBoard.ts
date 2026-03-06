@@ -1,0 +1,140 @@
+import { useState, useMemo, useEffect } from "react"
+import type { Todo, UpdateTodoInput } from "../types/todo"
+import type { Filters } from "../types/filter"
+import { useAuth } from "./useAuth"
+import { db } from "../utils/firebase"
+import {
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc,
+  Timestamp,
+  query,
+  orderBy,
+} from "firebase/firestore"
+
+export const useDashBoard = () => {
+  const { user } = useAuth()
+  const [todos, setTodos] = useState<Todo[]>([])
+  const toggleTodo = async (id: string) => {
+    if (!user) return
+    const target = todos.find((t) => t.id === id)
+    if (!target) return
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
+      await updateDoc(todoRef, {
+        completed: !target.completed,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
+  }
+  const [filters, setFilters] = useState<Filters>({
+    status: "all",
+    priority: "all",
+    limit: "all",
+  })
+
+  const activeFilterCount = Object.values(filters).filter(
+    (value) => value !== "all"
+  ).length
+
+  const today = useMemo(() => {
+    const date = new Date()
+    date.setHours(0, 0, 0, 0)
+    return date
+  }, [])
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filters.status === "uncompleted" && todo.completed) return false
+    if (filters.status === "completed" && !todo.completed) return false
+    if (filters.priority !== "all" && todo.priority !== filters.priority)
+      return false
+    if (filters.limit !== "all") {
+      if (!todo.dueDate) return true
+      const dueDate = todo.dueDate.toDate()
+      dueDate.setHours(0, 0, 0, 0)
+
+      if (filters.limit === "expired") {
+        if (dueDate >= today) return false
+      }
+
+      if (filters.limit === "today") {
+        if (dueDate.getTime() !== today.getTime()) return false
+      }
+
+      if (filters.limit === "this-week") {
+        const weekEnd = new Date(today)
+        weekEnd.setDate(today.getDate() + (7 - today.getDay()))
+        if (dueDate < today || dueDate > weekEnd) return false
+      }
+    }
+    return true
+  })
+
+  const isExpired = (dueDate: Timestamp | null) => {
+    if (!dueDate) return false
+    const date = dueDate.toDate()
+    date.setHours(0, 0, 0, 0)
+    return date < today
+  }
+
+  const updateTodo = async (
+    id: string,
+    data: UpdateTodoInput
+  ): Promise<void> => {
+    if (!user) return
+
+    try {
+      const todoRef = doc(db, "users", user.uid, "todos", id)
+
+      await updateDoc(todoRef, {
+        title: data.title,
+        dueDate: data.dueDate ? Timestamp.fromDate(data.dueDate) : null,
+        priority: data.priority,
+      })
+    } catch (error) {
+      alert("更新に失敗しました")
+    }
+  }
+
+  useEffect(() => {
+    if (!user) return
+    const todosRef = collection(db, "users", user.uid, "todos")
+
+    const sortQuery = query(todosRef, orderBy("createdAt", "desc"))
+
+    const unsubscribe = onSnapshot(sortQuery, (snapshot) => {
+      const todosData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Todo[]
+
+      setTodos(todosData)
+    })
+
+    return () => unsubscribe()
+  }, [user])
+
+  const totalCount = todos.length
+  const completedCount = todos.filter((todo) => todo.completed).length
+  const uncompletedCount = todos.filter(
+    (todo) => !todo.completed && !isExpired(todo.dueDate)
+  ).length
+  const expiredCount = todos.filter(
+    (todo) => !todo.completed && isExpired(todo.dueDate)
+  ).length
+
+  return {
+    filteredTodos,
+    filters,
+    setFilters,
+    activeFilterCount,
+    totalCount,
+    completedCount,
+    uncompletedCount,
+    expiredCount,
+    toggleTodo,
+    updateTodo,
+  }
+}
